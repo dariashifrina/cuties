@@ -1,0 +1,13 @@
+Cuties
+James Smith
+Gilvir Gill
+Dasha Shifrina
+=====================
+Plan: 05/18/17
+=====================
+Which jobs are most crucial?
+--------------------------
+Which components constitute core functionality (vs non-essential)?
+--------------------------
+Which components are prerequisites for others?Which tasks can be delegated, and which must be collaboratively tackled?
+--------------------------

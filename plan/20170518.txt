@@ -6,8 +6,29 @@ Dasha Shifrina
 Plan: 05/18/17
 =====================
 Which jobs are most crucial?
+Getting a camera feed to be displayed
+Getting video feed to be displayed
+Identifying the pixel that the user selects
+Finding pixels surrounding the user selected pixel based on its color distance
+Creating a tracked object that encompasses all of the pixels and can draw itself
+Calibration mode to adjust brightness, threshold, and contrast(also works as program debugger)
+^^^^^^^^^^^^^^^^^^^MVP^^^^^^^^^^^^^^^^^^^ 
+Frame manipulation/filtering
+Using previous frames as reference points to search new frames
+Tracking off screen
+Tracking 2 objects
+Finding the border pixels of the tracked object to draw only an outline of the object using polygons
+Motion detection
+Line tracing motion
+Interactive demo game
+These must be done in this approximate order.
 --------------------------
 Which components constitute core functionality (vs non-essential)?
+The Camera, Video, Frame, and TrackedObject classes are all essential, as well as a basic CCV driver that outputs the camera and marks the object in a basic way are all essential.
+Somewhat less essential but still key and considered core functionality is being able to select objects rather being stuck to a simple hard coded object such as a wiffle ball.
+Tracking multiple objects of the same type also constitutes core function, since only tracking 1 would lead to inconsistent behavior from the perspective of the user depending on how we implement the tracking/searching (it would essentially be non-safe and could randomly jump object).
 --------------------------
 Which components are prerequisites for others?Which tasks can be delegated, and which must be collaboratively tackled?
 --------------------------
+Getting camera feed/general video feed to be displayed does little in terms of reinforcing concepts, and can likely be delegated to one person while the others work on further research into the field of computervision and increasing their smarts.
+The Frame class and it’s accompanying methods can be delegated to one person while the other 2 work on writing methods for TrackedObject, since it simply involves adding a few things to make accessing or manipulating it easier.

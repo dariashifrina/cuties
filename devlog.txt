@@ -48,4 +48,10 @@ tales of wisdom gained...
 Gilvir and Dasha:
 ==============================================================
 
+2017-05-25
+--------------------------------------------------------------
+Gilvir: Got a live camera feed to be displayed
+Dasha and James: ironed out the final structure for TrackedObject and began coding its constructor.
+==============================================================
+
 2017-01-12

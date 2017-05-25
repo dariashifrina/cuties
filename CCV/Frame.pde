@@ -1,2 +1,3 @@
 class Frame {
+  byte[][][] colors;
 }

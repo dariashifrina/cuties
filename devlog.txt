@@ -5,6 +5,23 @@ Dasha Shifrina
 pd 03
 ---------------------
 Cuties Computer Vision
+────────▄▄▄▄▄▄▄▄▄▄▄▄▄───────────
+───██──██▀▀▀▀▀▀▀▀▀▀▀▀█──────────
+─▄████▄██───▄▄▄▄▄▄───█▄▄▄▄▄▄▄▄▄─
+▄█▀▀▀▀▀▀▀───██▄▄██───▀▀▀▀▀▀▀▀███
+█──────────────────────────────█
+█──────────────▄▄▄▄▄▄▄▄▄▄──────█
+█───────────▄███▀▀▀▀▀▀▀▀██▄───██
+█▄▄▄▄▄▄▄▄▄▄██▀─▄▄▀▀▀▀▀▀█▄─▀█▄▄██
+████████████─▄▀──────────▀▄─▀███
+███████████─▄▀─────────────█─▀██
+██████████──█──▄████████▄───█─██
+██████████──█▄█████████████▄█─██
+██████████──████████████████▀─██
+███████████─▀███████████████─▄██
+████████████▄─▀███████████▀─███▀
+───────────▀██▄─▀▀████▀▀─▄▄██▀──
+─────────────▀▀██▄▄▄▄▄▄███▀─────
 
 
 /////////// Zone of Reflection \\\\\\\\\\\
@@ -12,6 +29,7 @@ Cuties Computer Vision
 OBSTACLES OVERCOME
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 wow we so BOSS bc...
+-Got a camera feed working!
 
 UNRESOLVED ISSUES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -26,7 +44,7 @@ wow! oo!
 
 MID-DEVELOPMENT DESIGN CHANGES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
+- realized Camera has a 2D array attribute instead of a 3D array. Pixels aren't divided into two arrays of rows and cols but instead, a 1D array holds all of the pixels.
 
 LESSONS LEARNED
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -66,6 +84,7 @@ James, Gilvir, Dasha: Created UML diagram of CCV and flowcharts for CCV driver c
 --------------------------------------------------------------
 Gilvir: Got a live camera feed to be displayed
 Dasha and James: ironed out the final structure for TrackedObject and began coding its constructor.
+James, Gilvir, Dasha: realized Camera has a 2D array attribute instead of a 3D array. Pixels aren't divided into two arrays of rows and cols but instead, a 1D array holds all of the pixels.
 ==============================================================
 
 2017-05-26

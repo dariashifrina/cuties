@@ -1,10 +1,10 @@
 class Camera extends Video {
-      Capture cam;
-      PApplet ccv;
+  Capture cam;
+  PApplet ccv;
   Camera(PApplet app) {
     ccv = app;
     String[] cameras = Capture.list();
-    if (cameras.length <= 0) exit();
+    if (cameras.length <= 0) ccv.exit();
     else {
       cam = new Capture( app, cameras[0]);
       cam.start();

@@ -13,7 +13,7 @@ void setup() {
 }
 
 /**
- *Draws the next image from the camera feed and the outline of the object being tracked
+ *Draws the next image from the camera feed and the outline of the object being tracked.
  */
 void draw() {
   currentFrame = new Frame(in.getImage());

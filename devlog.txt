@@ -89,7 +89,5 @@ James, Gilvir, Dasha: realized Camera has a 2D array attribute instead of a 3D a
 
 2017-05-26
 --------------------------------------------------------------
-James:
-Dasha:
-Gilvir:
+James, Gilvir, Dasha: Continued to write the framework for the program. We are almost finished with the main code that allows the classes to interact. We now hope to finish the framework by tomorrow and begin getting our hands dirty in the nitty gritty :)
 ==============================================================

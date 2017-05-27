@@ -2,21 +2,27 @@
  * Dasha, James, Gilivr
  * APCS2 Pd3
  */
+
 Frame currentFrame;
 Camera in;
-// TrackedObject tracked;
+TrackedObject tracked;
 
 void setup() {
-  size(600, 450);
-  //for some reason, the Capture class requires having the Applet Object running the program, and so a reference to it must be passed
-  in = new Camera(this);
+  size(600, 450);//adjusts the camera resolution
+  in = new Camera(this);//pass PApplet to Camera object
 }
+
+/**
+ *Draws the next image from the camera feed and the outline of the object being tracked
+ */
 void draw() {
   currentFrame = new Frame(in.getImage());
-  image(currentFrame.getImg(),0,0);
+  image(currentFrame.getImg(), 0, 0);
 }
-//TrackedObject tracked;
 
-//void mouseClicked() {
-//tracked = new TrackedObject(mouseX, mouseY);
-//}
+/**
+ *Creates a trackedObject at the mouse's position
+ */
+void mouseClicked() {
+  tracked = new TrackedObject(mouseX, mouseY, currentFrame);
+}

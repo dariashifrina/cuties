@@ -11,9 +11,10 @@ int state; //0 = in user prompt, 1 = camera, 2 = movie
 UserMenu menu;
 
 void setup() {
-  size(600,450);//adjusts the camera resolution
+  size(600, 450);//adjusts the camera resolution
   state = 0;
   menu = new UserMenu(width, height);
+  in = null;
 }
 
 /**
@@ -31,7 +32,7 @@ void draw() {
     img = in.getImage();//get the camera's frame
     currentFrame = new Frame(img);//turn that image into a frame for a possible trackedObject
     //if (tracked != null) { //if there is a trackedObject, display it
-    // tracked.draw();
+    //  tracked.draw();
     //}
     image(img, 0, 0); //Display the image
   }
@@ -42,9 +43,30 @@ void draw() {
  *Creates a trackedObject at the mouse's position
  */
 void mouseClicked() {
-  if (state == 0) {
-    state = menu.mouseClicked();
+  if (state == 0) { //if you are in the user menu
+    int toBeState; //Handles threading in the case of state 2 so the draw method doesn't get ahead of the mouseClicked()
+    toBeState = menu.mouseClicked(); //calls mouseClicked of menu to check if the mouse is in the buttons
+    if (toBeState == 1) {
+      in = new Camera(this);
+      state = toBeState;
+    }
+    if (toBeState == 2) {
+      selectInput("Select a video file to run", "fileSelected"); //opens OS's filesystem to get File object. "fileSelected" is method callback
+    }
   } else {
-//    tracked = new TrackedObject(mouseX, mouseY, currentFrame);
+    //  tracked = new TrackedObject(mouseX, mouseY, currentFrame);
+  }
+}
+
+/**
+*Called by selectInput() method callback. Creates a video object and sets the state to 2
+*@return void
+*/
+void fileSelected(File selection) {
+  if (selection == null) {
+    println("Window was closed or the user hit cancel.");
+  } else { 
+    in = new Video(this, selection.getAbsolutePath()); //turns the file object into a String path and passes it into a Video file feed object
+    state = 2;  //finally sets the state since you are at the end of multithreading
   }
 }

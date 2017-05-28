@@ -30,21 +30,23 @@ OBSTACLES OVERCOME
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 wow we so BOSS bc...
 -Got a camera feed working!
+-Handled multithreading in file selection
+-Got a video file feed working
 
 UNRESOLVED ISSUES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-blah blah pesky bug...
-maybe some of these will move into the Obs.Ovrcm section...
+File selection is not restricted to video file formats!
 
 COOL STUFF LEARNED
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-wow! oo! 
+How to work with multithreading
 
 
 
 MID-DEVELOPMENT DESIGN CHANGES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 - realized Camera has a 2D array attribute instead of a 3D array. Pixels aren't divided into two arrays of rows and cols but instead, a 1D array holds all of the pixels.
+- Abstracted video feed to an interface implemented by video file and web cam.
 
 LESSONS LEARNED
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -95,5 +97,5 @@ James, Gilvir, Dasha: Continued to write the framework for the program. We are a
 
 2017-05-27
 --------------------------------------------------------------
-James: Set up class for video file stream, abstracted video feeds, and wrote the code for the user menu to select webcam vs video file feed.
+James: Set up class for video file stream, restructured video feeds, and wrote the code for the user menu to select webcam vs video file feed.
 ==============================================================

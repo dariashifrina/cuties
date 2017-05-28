@@ -1,4 +1,4 @@
-Cuties
+﻿Cuties
 James Smith
 Gilvir Gill
 Dasha Shifrina
@@ -90,4 +90,10 @@ James, Gilvir, Dasha: realized Camera has a 2D array attribute instead of a 3D a
 2017-05-26
 --------------------------------------------------------------
 James, Gilvir, Dasha: Continued to write the framework for the program. We are almost finished with the main code that allows the classes to interact. We now hope to finish the framework by tomorrow and begin getting our hands dirty in the nitty gritty :)
+==============================================================
+
+
+2017-05-27
+--------------------------------------------------------------
+James: Set up class for video file stream, abstracted video feeds, and wrote the code for the user menu to select webcam vs video file feed.
 ==============================================================

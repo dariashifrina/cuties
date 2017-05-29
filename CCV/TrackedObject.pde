@@ -1,6 +1,6 @@
 //class TrackedObject {
 //  color chosenColor; //selected color of the pixel
-//  PShape shape; //polygon shape of the object
+//  PShape shape; //polygon shape of the object (as a list of vertices)
 //  ArrayList objectContained; //collection of object pixels
 //  int pixPos; //position of pixel
 //  Frame frame; 

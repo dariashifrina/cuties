@@ -11,7 +11,8 @@ int state; //0 = in user prompt, 1 = camera, 2 = movie
 UserMenu menu;
 
 void setup() {
-  size(600, 450);//adjusts the camera resolution
+  size(1920, 1080);//adjusts the camera resolution
+  frameRate(60);
   state = 0;
   menu = new UserMenu(width, height);
   in = null;
@@ -31,12 +32,27 @@ void draw() {
   else {
     img = in.getImage();//get the camera's frame
     currentFrame = new Frame(img);//turn that image into a frame for a possible trackedObject
+    //img.loadPixels();
+    //mirror image
+    color[] pixels = img.pixels;
+    //for every row:
+    int length = 0;
+    if (img.width != 0) {
+      length = pixels.length/img.width;
+    }
+    for (int i = 0; i <length; i++) {
+      for (int j = 0; j <img.width/2; j++) {
+        currentFrame.swapColors(j, i, img.width-j-1, i);
+      }
+    }
+    //img.updatePixels();
     //if (tracked != null) { //if there is a trackedObject, display it
     //  tracked.draw();
     //}
     image(img, 0, 0); //Display the image
   }
 }
+
 
 
 /**

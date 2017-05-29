@@ -98,4 +98,5 @@ James, Gilvir, Dasha: Continued to write the framework for the program. We are a
 2017-05-27
 --------------------------------------------------------------
 James: Set up class for video file stream, restructured video feeds, and wrote the code for the user menu to select webcam vs video file feed.
+Gilvir: Added a few methods to Frame such as setColor() swapColor() for ease of use, implemented mirroring to simulate what people expect/demonstrate how to manipulate the image
 ==============================================================

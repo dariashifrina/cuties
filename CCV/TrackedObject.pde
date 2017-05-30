@@ -30,6 +30,13 @@
 //   *Finds the pixels of the tracked object and adds them to the objectContained array
 //   *@return void
 //   */
+
+//void buildObject()
+//{
+//  buildObject(pixPos);
+//}
+  
+  
 //  void buildObject(int pix)
 //  {
     //int[] neighborz = getNeighbors(pix);

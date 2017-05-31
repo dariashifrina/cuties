@@ -15,7 +15,7 @@ Cuties Computer Vision
 █▄▄▄▄▄▄▄▄▄▄██▀─▄▄▀▀▀▀▀▀█▄─▀█▄▄██
 ████████████─▄▀──────────▀▄─▀███
 ███████████─▄▀─────────────█─▀██
-██████████──█──▄████████▄───█─██
+██████████──█──▄████████▄───█─██ 
 ██████████──█▄█████████████▄█─██
 ██████████──████████████████▀─██
 ███████████─▀███████████████─▄██
@@ -32,11 +32,11 @@ wow we so BOSS bc...
 -Got a camera feed working!
 -Handled multithreading in file selection
 -Got a video file feed working
-
+-Got mirroring to work
 UNRESOLVED ISSUES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 File selection is not restricted to video file formats!
-
+Naive approach that would be used as intermediary to MVP is way too naive and doesn't function at all due to causing a StackOverFlow error from recursive calls. Better edge detection must therefore be deployed.
 COOL STUFF LEARNED
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 How to work with multithreading
@@ -100,3 +100,8 @@ James, Gilvir, Dasha: Continued to write the framework for the program. We are a
 James: Set up class for video file stream, restructured video feeds, and wrote the code for the user menu to select webcam vs video file feed.
 Gilvir: Added a few methods to Frame such as setColor() swapColor() for ease of use, implemented mirroring to simulate what people expect/demonstrate how to manipulate the image
 ==============================================================
+
+2017-05-30
+--------------------------------------------------------------
+Gilvir: Attempted to implement most primative version of TrackedObject, which relies on recursively telling each pixel to call it's fellow pixels. However, this caused a StackOverFlow error,and so the entire method needs to be reevaluated. 
+==================================================

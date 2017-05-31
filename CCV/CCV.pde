@@ -6,7 +6,7 @@
 Frame currentFrame;
 VideoStream in;
 PImage img;
-//TrackedObject tracked;
+TrackedObject tracked;
 int state; //0 = in user prompt, 1 = camera, 2 = movie
 UserMenu menu;
 
@@ -46,9 +46,9 @@ void draw() {
       }
     }
     //img.updatePixels();
-    //if (tracked != null) { //if there is a trackedObject, display it
-    //  tracked.draw();
-    //}
+    if (tracked != null) { //if there is a trackedObject, display it
+      tracked.draw();
+    }
     image(img, 0, 0); //Display the image
   }
 }
@@ -70,7 +70,7 @@ void mouseClicked() {
       selectInput("Select a video file to run", "fileSelected"); //opens OS's filesystem to get File object. "fileSelected" is method callback
     }
   } else {
-    //  tracked = new TrackedObject(mouseX, mouseY, currentFrame);
+      tracked = new TrackedObject(mouseX, mouseY, currentFrame);
   }
 }
 

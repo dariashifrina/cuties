@@ -20,6 +20,9 @@ class Frame {
   color getColor(int pos) {
     return screen[pos];
   }
+  int getSize() {
+    return screen.length;
+  }
 
   /**
    *Gets the color of the pixel at the given position

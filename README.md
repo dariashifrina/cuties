@@ -4,7 +4,7 @@ Cuties Computer Vision (**CCV**) is a basic implementation of [Computer Vision](
 
 This program works by turning each individual frame of a video feed into an array of colors in which each pixel is a color, then navigating this array, finding pixels that match the selected object's color and position relative to the previous frame. 
 
-To run the CCV program, first install the Video library from the Processing foundation. Instructions can be found [here](https://github.com/processing/processing/wiki/How-to-Install-a-Contributed-Library). Afterwards, enter `processing CCV/CCV.pde` into the terminal, run the applet, select whether you want to use an active camera feed, or a prerecorded video, and then select the object that you would like the program to track. 
+To run the CCV program, first install the Video library from the Processing foundation. Instructions can be found [here](https://github.com/processing/processing/wiki/How-to-Install-a-Contributed-Library). Alternatively, go to sketches, library, and download and search for the Video library based off of GStreamer. Afterwards, enter `processing CCV/CCV.pde` into the terminal, run the applet, select whether you want to use an active camera feed, or a prerecorded video, and then select the object that you would like the program to track. 
 
 Have fun, thinkers!
 

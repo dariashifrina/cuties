@@ -6,6 +6,7 @@ class TrackedObject {
   Frame frame; 
   boolean[] visited;
   int _threshold;
+  int[] newCenter;
 
 
 //  /**
@@ -19,7 +20,8 @@ class TrackedObject {
     chosenColor = frame.getColor(pixPos); //access the color of the target pixel
     objectContained = new ArrayList();
     visited = new boolean[frame.getSize()];
-    _threshold = 6000;
+    _threshold = 30;
+    newCenter = new int[2];
   }
 
 //  /**
@@ -29,11 +31,16 @@ class TrackedObject {
   {
     //assembles the arraylist containing the desired indices:
     buildObject(pixPos);
-    color red = color(255, 0, 0);
+    color red = color(0, 0, 0);
     for (int i: objectContained) {
       int[] coords = CCVMath.getXY(i, frame.getWidth());
-      set(coords[0], coords[1], red);
+      set(0, 0, red);
+      
     }
+  }
+  ArrayList<Integer> edges() {
+    buildObject(pixPos);
+    return objectContained;
   }
 
 
@@ -108,13 +115,13 @@ private ArrayList<Integer> getNeighbors(int pos)
     //getNeighbors: gives you an ArrayList of ALL the neighbors
     //if the length of the returned arraylist is less than 4, that means one of the direct neighbors isnt part of the object, so it's an edge. Add it's pos to the arraylist of edges.
     //start at the index pixPos:
-    ArrayList<Integer> neighbors = getNeighbors(pos);
     //if you're an edge, add yourself to the list of edges:
+    ArrayList<Integer> neighbors = getNeighbors(pos);
     if (neighbors.size() < 4) ret.add(pos);
-    //if youre a neighbor thats not been checked for edges yet, get checked for edges:
     for (int i: neighbors) {
-      if (!visited[i]) ret.addAll(getEdges(i));
+          if (!visited[i]) ret.addAll(getEdges(i));
     }
+    //if youre a neighbor thats not been checked for edges yet, get checked for edges:
     return ret;
     
         

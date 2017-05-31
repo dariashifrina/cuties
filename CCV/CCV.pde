@@ -46,10 +46,15 @@ void draw() {
       }
     }
     //img.updatePixels();
-    if (tracked != null) { //if there is a trackedObject, display it
-      tracked.draw();
-    }
     image(img, 0, 0); //Display the image
+    if (tracked != null) { //if there is a trackedObject, display it
+      ArrayList<Integer> objectContained = tracked.edges(); 
+      color red = color(0, 255, 0);
+      for (int i: objectContained) {
+        int[] coords = CCVMath.getXY(i, frame.getWidth());
+        set(coords[0], coords[1], red);
+      }
+    }
   }
 }
 

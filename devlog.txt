@@ -104,4 +104,5 @@ Gilvir: Added a few methods to Frame such as setColor() swapColor() for ease of 
 2017-05-30
 --------------------------------------------------------------
 Gilvir: Attempted to implement most primative version of TrackedObject, which relies on recursively telling each pixel to call it's fellow pixels. However, this caused a StackOverFlow error,and so the entire method needs to be reevaluated. 
+James: Revised flowchart and UML diagrams.
 ==================================================

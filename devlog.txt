@@ -109,5 +109,6 @@ James: Revised flowchart and UML diagrams.
 2017-06-01
 --------------------------------------------------------------
 In class: changed approach to tracking edges instead of using color. We're going to use color to find an object's pixel, then use edge filtering to navigate the edges of the object.
+James: Fixed put the repo in compliance with the homeworks(I didn't realize that we had to make new files for the plan)
 ==============================================================
 ==================================================

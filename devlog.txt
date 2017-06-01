@@ -105,4 +105,9 @@ Gilvir: Added a few methods to Frame such as setColor() swapColor() for ease of 
 --------------------------------------------------------------
 Gilvir: Attempted to implement most primative version of TrackedObject, which relies on recursively telling each pixel to call it's fellow pixels. However, this caused a StackOverFlow error,and so the entire method needs to be reevaluated. 
 James: Revised flowchart and UML diagrams.
+
+2017-06-01
+--------------------------------------------------------------
+In class: changed approach to tracking edges instead of using color. We're going to use color to find an object's pixel, then use edge filtering to navigate the edges of the object.
+==============================================================
 ==================================================

@@ -1,0 +1,29 @@
+﻿Cuties
+James Smith
+Gilvir Gill
+Dasha Shifrina
+=====================
+Plan: 06/01/17
+=====================
+Which jobs are most crucial?
+Developing an algo for traversing a matrix outwards from a single point
+Edge filtering
+TrackedObject Constructor
+Developing an algorithm for navigating an edge
+Getting the trackedObject class to work
+Calibration mode to adjust threshold and swap between mirrored frames, and edge filter display(also works as program debugger)
+^^^^^^^^^^^^^^^^^^^MVP^^^^^^^^^^^^^^^^^^^ 
+Tracking off screen
+Line tracing motion
+Multiple object tracking
+Optical Character Recognition(OCR)
+--------------------------
+Which components constitute core functionality (vs non-essential)?
+The Camera, Video, Frame, and TrackedObject classes are all essential, as well as a basic CCV driver that outputs the camera and marks the object in a basic way are all essential.
+Tracking multiple objects of the same type also constitutes core function, since only tracking 1 would lead to inconsistent behavior from the perspective of the user depending on how we implement the tracking/searching (it would essentially be non-safe and could randomly jump object).
+--------------------------
+Which components are prerequisites for others?Which tasks can be delegated, and which must be collaboratively tackled?
+--------------------------
+The algo for outwards matrix traversal from a single point  needs to be done before any work on the tracked object can begin(can be delegated)
+Edge detection filtering is necessary to know when to stop/start your matrix traversal(can be delegated)
+Everything past the MVP can be done at any time, though tracking off screen should most likely be done before multi object tracking.

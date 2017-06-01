@@ -1,4 +1,4 @@
-Cuties
+﻿Cuties
 James Smith
 Gilvir Gill
 Dasha Shifrina
@@ -16,8 +16,6 @@ Calibration mode to adjust brightness, threshold, and contrast(also works as pro
 Frame manipulation/filtering
 Using previous frames as reference points to search new frames
 Tracking off screen
-Tracking 2 objects
-Finding the border pixels of the tracked object to draw only an outline of the object using polygons
 Motion detection
 Line tracing motion
 Interactive demo game

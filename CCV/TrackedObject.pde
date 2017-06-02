@@ -5,7 +5,7 @@ class TrackedObject {
   color chosenColor; //selected color of the pixel
   int pixPos; //position of pixel
   int _threshold;//maximum value to consider a pixel similar to the object pixel
-  boolean[] traversed;//maps to the frame for the pixels traversed. if a pixel is true, it has been traversed on
+  boolean[] traversed; //maps to the frame for the pixels traversed. if a pixel is true, it has been traversed on
 
 
   //  /**

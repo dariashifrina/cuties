@@ -1,5 +1,3 @@
 interface VideoStream {
-  
   PImage getImage();
-  
 }

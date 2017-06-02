@@ -36,19 +36,14 @@ void draw() {
     img = in.getImage();//get the camera's frame
     currentFrame = new Frame(img);//turn that image into a frame for a possible trackedObject
     currentFrame.mirror(); //mirror the picture
-      if (!resized) {
-        surface.setSize(img.width, img.height);
-        resized = true;
-      }
+    if (!resized) {
+      surface.setSize(img.width, img.height);
+      resized = true;
+    }
     tracked.update(currentFrame);//update the object with the new frame
-    image(img, 0, 0); //Display the image
+    currentFrame.draw(); //Display the image
     if (tracked != null) { //if there is a trackedObject, display it
-      ArrayList<Integer> objectContained = tracked.edges(); 
-      color red = color(0, 255, 0);
-      for (int i : objectContained) {
-        int[] coords = CCVMath.getXY(i, frame.getWidth());
-        set(coords[0], coords[1], red);
-      }
+      tracked.draw();
     }
   }
 }
@@ -85,20 +80,20 @@ void fileSelected(File selection) {
     in = new Video(this, selection.getAbsolutePath()); //turns the file object into a String path and passes it into a Video file feed object
     state = 2;  //finally sets the state since you are at the end of multithreading
   }
-  
-      //color[] pixels = img.pixels;
-    ////for every row:
-    //int length = 0;
-    //if (img.width != 0) {
-    //  length = pixels.length/img.width;
-    //  if (!resized) {
-    //    surface.setSize(img.width, img.height);
-    //    resized = true;
-    //  }
-    //}
-    //for (int i = 0; i <length; i++) {
-    //  for (int j = 0; j <img.width/2; j++) {
-    //    currentFrame.swapColors(j, i, img.width-j-1, i);
-    //  }
-    //}
+
+  //color[] pixels = img.pixels;
+  ////for every row:
+  //int length = 0;
+  //if (img.width != 0) {
+  //  length = pixels.length/img.width;
+  //  if (!resized) {
+  //    surface.setSize(img.width, img.height);
+  //    resized = true;
+  //  }
+  //}
+  //for (int i = 0; i <length; i++) {
+  //  for (int j = 0; j <img.width/2; j++) {
+  //    currentFrame.swapColors(j, i, img.width-j-1, i);
+  //  }
+  //}
 }

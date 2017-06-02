@@ -61,4 +61,17 @@ class Frame {
   int getWidth() {
     return img.width;
   }
+  
+  //mirrors the image on the screen
+  void mirror(){
+    //for every row:
+    int length = 0;
+    if (img.width != 0) {
+      length = screen.length/img.width;
+    }
+    for (int i = 0; i <length; i++) {
+      for (int j = 0; j <img.width/2; j++) {
+        frm.swapColors(j, i, img.width-j-1, i);
+      }
+    }
 }

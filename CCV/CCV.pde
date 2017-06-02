@@ -35,22 +35,11 @@ void draw() {
   else {
     img = in.getImage();//get the camera's frame
     currentFrame = new Frame(img);//turn that image into a frame for a possible trackedObject
-    //mirror image
-    color[] pixels = img.pixels;
-    //for every row:
-    int length = 0;
-    if (img.width != 0) {
-      length = pixels.length/img.width;
+    currentFrame.mirror(); //mirror the picture
       if (!resized) {
         surface.setSize(img.width, img.height);
         resized = true;
       }
-    }
-    for (int i = 0; i <length; i++) {
-      for (int j = 0; j <img.width/2; j++) {
-        currentFrame.swapColors(j, i, img.width-j-1, i);
-      }
-    }
     tracked.update(currentFrame);//update the object with the new frame
     image(img, 0, 0); //Display the image
     if (tracked != null) { //if there is a trackedObject, display it
@@ -96,4 +85,20 @@ void fileSelected(File selection) {
     in = new Video(this, selection.getAbsolutePath()); //turns the file object into a String path and passes it into a Video file feed object
     state = 2;  //finally sets the state since you are at the end of multithreading
   }
+  
+      //color[] pixels = img.pixels;
+    ////for every row:
+    //int length = 0;
+    //if (img.width != 0) {
+    //  length = pixels.length/img.width;
+    //  if (!resized) {
+    //    surface.setSize(img.width, img.height);
+    //    resized = true;
+    //  }
+    //}
+    //for (int i = 0; i <length; i++) {
+    //  for (int j = 0; j <img.width/2; j++) {
+    //    currentFrame.swapColors(j, i, img.width-j-1, i);
+    //  }
+    //}
 }

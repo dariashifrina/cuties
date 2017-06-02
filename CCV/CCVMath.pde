@@ -5,8 +5,8 @@ static class CCVMath {
    *@params int xcor, int ycor, int screen width
    *@return int
    */
-  static int getXY(int xcor, int ycor, int width) {
-    return xcor + (ycor*width);
+  static int getXY(int[] coords, int width) {
+    return coords[0] + (coords[1]*width);
   }
   
   

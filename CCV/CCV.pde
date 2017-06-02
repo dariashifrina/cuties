@@ -40,10 +40,9 @@ void draw() {
       surface.setSize(img.width, img.height);
       resized = true;
     }
-    tracked.update(currentFrame);//update the object with the new frame
     currentFrame.draw(); //Display the image
     if (tracked != null) { //if there is a trackedObject, display it
-      tracked.draw();
+      tracked.draw(currentFrame);//update the object with the new frame and draw it
     }
   }
 }

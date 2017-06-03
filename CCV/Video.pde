@@ -7,8 +7,8 @@ class Video implements VideoStream {
     mov = new Movie(app, fileName);
     mov.loop();//when the movie ends, restart it
   }
-  
-    /**
+
+  /**
    *Gets the next image from the Movie feed
    *@return PImage
    */

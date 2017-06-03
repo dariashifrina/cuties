@@ -12,9 +12,9 @@ class Frame {
     this.img = img; //save PImage;
   }
 
-void draw(){
-  image(img, 0, 0);
-}
+  void draw() {
+    image(img, 0, 0);
+  }
   //========================Helper Functions========================
   int getSize() {
     return screen.length;
@@ -28,8 +28,8 @@ void draw(){
   color getColor(int[] coords) {
     return screen[CCVMath.getXY(coords, img.width)];
   }
-  
-    /**
+
+  /**
    *Gets the color of the pixel at the given position
    *@param int 1D position of pixel
    *@return color
@@ -66,8 +66,8 @@ void draw(){
   int getWidth() {
     return img.width;
   }
-  
-  int getHeight(){
+
+  int getHeight() {
     return img.height;
   }
 
@@ -92,6 +92,51 @@ void draw(){
         swapColors(coords1, coords2);
       }
     }
+  }
+
+  //performs the sobel edge detection operation on the frame
+  void sobelFilter() {
+    int[][] mat=new int[3][3];
+    int[]  coord = new int[2];
+      for (int i=1; i< getWidth()-1; i++) {
+        for (int j=1; j< getHeight()-1; j++) {
+          coord[0] = i-1;
+          coord[1] = j-1;
+          mat[0][0] = (int)red(getColor( coord ));
+          coord[0] = i-1;
+          coord[1] = j;
+          mat[0][1] = (int)red(getColor( coord ));
+          coord[0] = i-1;
+          coord[1] = j+1;  
+          mat[0][2] = (int)red(getColor( coord ));
+          coord[0] = i;
+          coord[1] = j-1;  
+          mat[1][0] = (int)red(getColor( coord ));
+          coord[0] = i;
+          coord[1] = j+1;  
+          mat[1][2] = (int)red(getColor( coord ));
+          coord[0] = i+1;
+          coord[1] = j-1;  
+          mat[2][0] = (int)red(getColor( coord ));
+          coord[0] = i+1;
+          coord[1] = j;  
+          mat[2][1] = (int)red(getColor( coord ));
+          coord[0] = i+1;
+          coord[1] = j+1;  
+          mat[2][2] = (int)red(getColor( coord ));
+          int edge = (int)convolution(mat);
+          coord[0] = i;
+          coord[1] = j;
+          setColor(coord, color(edge<<16 | edge<<8 | edge));
+        }
+      }
+    }
+
+  //Convolutes the matrix according to the kernel x and kernel y matrices in the sobel operation
+  public double convolution(int[][] mat) {
+    int gy=(mat[0][0]*-1)+(mat[0][1]*-2)+(mat[0][2]*-1)+(mat[2][0])+(mat[2][1]*2)+(mat[2][2]*1);
+    int gx=(mat[0][0])+(mat[0][2]*-1)+(mat[1][0]*2)+(mat[1][2]*-2)+(mat[2][0])+(mat[2][2]*-1);
+    return Math.sqrt(Math.pow(gy, 2)+Math.pow(gx, 2));
   }
   //========================Major Methods========================
 }

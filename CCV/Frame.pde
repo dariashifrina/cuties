@@ -99,12 +99,11 @@ class Frame {
   }
 
   //performs the sobel edge detection operation on the frame
-  void sobelFilter() {
-    img.filter(BLUR,5);
+  void sobelFilter(int threshold) {
+    img.filter(BLUR,1);
     img.filter(GRAY);//convert to grayscale for the gradient
     int[][] mat=new int[3][3];
     int[]  coord = new int[2];
-    int threshold = 200;
     for (int i=1; i< getWidth()-1; i++) {
       for (int j=1; j< getHeight()-1; j++) { //iterate through each pixel and get its neighbors. Get their intensities to form a color matrix to approximate the local intensity vector gradient
         coord[0] = i-1;
@@ -147,8 +146,8 @@ class Frame {
 
   //Convolutes the matrix according to the kernel x and kernel y derivative matrices in the sobel operation to form a vector gradient number
   public double convolution(int[][] mat) {
-    int gy=((mat[0][0]*-3)+(mat[0][1]*-10)+(mat[0][2]*-3)+(mat[2][0])+(mat[2][1]*10)+(mat[2][2]*3))/10;
-    int gx=((mat[0][0])+(mat[0][2]*-3)+(mat[1][0]*10)+(mat[1][2]*-10)+(mat[2][0])+(mat[2][2]*-3))/10;
+    int gy=((mat[0][0]*-1)+(mat[0][1]*-2)+(mat[0][2]*-1)+(mat[2][0])+(mat[2][1]*2)+(mat[2][2]*1))/3;
+    int gx=((mat[0][0])+(mat[0][2]*-1)+(mat[1][0]*2)+(mat[1][2]*-2)+(mat[2][0])+(mat[2][2]*-1))/3;
     return Math.sqrt(Math.pow(gy, 2)+Math.pow(gx, 2));
   }
   //========================Major Methods========================

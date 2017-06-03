@@ -8,6 +8,7 @@ PImage img;
 TrackedObject tracked;
 int state; //0 = in user prompt, 1 = camera, 2 = movie
 UserMenu menu;
+int threshold;
 
 void setup() {
   size(600, 480);//adjusts the camera resolution
@@ -17,6 +18,7 @@ void setup() {
   state = 0;
   menu = new UserMenu(width, height);
   in = null;
+  threshold = 224;
 }
 
 /**
@@ -36,7 +38,7 @@ void draw() {
     currentFrame = new Frame(img);//turn that image into a frame for a possible trackedObject
     surface.setSize(currentFrame.getWidth(), currentFrame.getHeight());
     //currentFrame.mirror(); //mirror the picture
-    currentFrame.sobelFilter();
+    //currentFrame.sobelFilter(threshold);
     currentFrame.draw(); //Display the image
     if (tracked != null) { //if there is a trackedObject, display it
       tracked.draw(currentFrame);//update the object with the new frame and draw it
@@ -77,20 +79,15 @@ void fileSelected(File selection) {
     in = new Video(this, selection.getAbsolutePath()); //turns the file object into a String path and passes it into a Video file feed object
     state = 2;  //finally sets the state since you are at the end of multithreading
   }
+}
 
-  //color[] pixels = img.pixels;
-  ////for every row:
-  //int length = 0;
-  //if (img.width != 0) {
-  //  length = pixels.length/img.width;
-  //  if (!resized) {
-  //    surface.setSize(img.width, img.height);
-  //    resized = true;
-  //  }
-  //}
-  //for (int i = 0; i <length; i++) {
-  //  for (int j = 0; j <img.width/2; j++) {
-  //    currentFrame.swapColors(j, i, img.width-j-1, i);
-  //  }
-  //}
+void keyPressed() {
+  if (keyCode == UP) {
+    threshold += 2;
+    println(threshold);
+  }
+  if (keyCode == DOWN) {
+    threshold -=2;
+    println(threshold);
+  }
 }

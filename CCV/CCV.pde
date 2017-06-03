@@ -2,23 +2,21 @@
  * Dasha, James, Gilivr
  * APCS2 Pd3
  */
-
 Frame currentFrame;
 VideoStream in;
 PImage img;
 TrackedObject tracked;
 int state; //0 = in user prompt, 1 = camera, 2 = movie
 UserMenu menu;
-boolean resized;
 
 void setup() {
   size(600, 480);//adjusts the camera resolution
+  background(0);
   surface.setResizable(true);
   frameRate(60);
   state = 0;
   menu = new UserMenu(width, height);
   in = null;
-  resized = false;
 }
 
 /**
@@ -27,21 +25,18 @@ void setup() {
 void draw() {
   //user setup loop
   if (state == 0) {
-    background(0, 0, 0);
+    background(0);
     menu.draw();
   }
 
-  //Main loo[
+  //Main loop
   else {
-    background(0,0,0);
+    //background(0,0,0);
     img = in.getImage();//get the camera's frame
     currentFrame = new Frame(img);//turn that image into a frame for a possible trackedObject
+    surface.setSize(currentFrame.getWidth(), currentFrame.getHeight());
     //currentFrame.mirror(); //mirror the picture
-    if (!resized) {
-      surface.setSize(currentFrame.getWidth(), currentFrame.getHeight());
-      resized = true;
-    }
-    currentFrame.sobelFilter(); // <--------------------------------------------
+    currentFrame.sobelFilter();
     currentFrame.draw(); //Display the image
     if (tracked != null) { //if there is a trackedObject, display it
       tracked.draw(currentFrame);//update the object with the new frame and draw it

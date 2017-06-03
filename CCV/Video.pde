@@ -6,6 +6,7 @@ class Video implements VideoStream {
   Video(PApplet app, String fileName) {
     mov = new Movie(app, fileName);
     mov.loop();//when the movie ends, restart it
+    mov.volume(0);//mute the feed
   }
 
   /**

@@ -127,7 +127,9 @@ class Frame {
           int edge = (int)convolution(mat);
           coord[0] = i;
           coord[1] = j;
-          setColor(coord, color(edge<<16 | edge<<8 | edge));
+          color old = getColor(coord);
+          setColor(coord, edge);
+          //setColor(coord, old);
         }
       }
     }

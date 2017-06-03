@@ -31,8 +31,9 @@ void draw() {
     menu.draw();
   }
 
-  //Main loop
+  //Main loo[
   else {
+    background(0,0,0);
     img = in.getImage();//get the camera's frame
     currentFrame = new Frame(img);//turn that image into a frame for a possible trackedObject
     //currentFrame.mirror(); //mirror the picture

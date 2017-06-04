@@ -38,9 +38,8 @@ void draw() {
     //background(0,0,0);
     img = in.getImage();//get the camera's frame
     currentFrame = new Frame(img);//turn that image into a frame for a possible trackedObject
-    surface.setSize(currentFrame.getWidth(), currentFrame.getHeight());
-    //currentFrame.mirror(); //mirror the picture
-    //currentFrame.sobelFilter(threshold);
+    currentFrame.mirror(); //mirror the picture
+    currentFrame.sobelFilter(sobel_threshold);
     currentFrame.draw(); //Display the image
     if (tracked != null) { //if there is a trackedObject, display it
       tracked.draw(currentFrame);//update the object with the new frame and draw it

@@ -97,17 +97,40 @@ class Frame {
       }
     }
   }
+  int[][] kernel(int n, int[] coords) {
+    int x = coords[0];
+    int y = coords[1];
+    int ysgn = 1;
+    int xsgn = 1;
+    //return a kernel with n elements on each side of the center, if edge assume mirror
+    int[][] k = new int[n*2+1][n*2+1];
+    //from top left to bottom right:
+    for (int i = -y; i <=y; i++) {
+      ysgn = 1;
+      if (i < 0) ysgn = -1;
+      for (int j = -x; j <= x; j++) {
+        xsgn = 1;
+        if (j < 0) xsgn = -1;
+        coords[0]=(xsgn*(n+i));
+        coords[1]=(ysgn*n+i);
+        k[coords[0]][coords[1]] = getColor(coords);
+      }
+    }
+    
+    return k;
+  }
 
   //performs the sobel edge detection operation on the frame
   void sobelFilter(int threshold) {
-    img.filter(BLUR,1);
-    img.filter(GRAY);//convert to grayscale for the gradient
+    //img.filter(BLUR,1);
+    //img.filter(GRAY);//convert to grayscale for the gradient
     int[][] mat=new int[3][3];
     int[]  coord = new int[2];
     for (int i=1; i< getWidth()-1; i++) {
       for (int j=1; j< getHeight()-1; j++) { //iterate through each pixel and get its neighbors. Get their intensities to form a color matrix to approximate the local intensity vector gradient
         coord[0] = i-1;
         coord[1] = j-1;
+        //mat = kernel(1, coord);
         mat[0][0] = (int)brightness(getColor( coord ));
         coord[0] = i-1;
         coord[1] = j;

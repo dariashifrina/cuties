@@ -1,5 +1,6 @@
 class Frame {
   color[] screen;
+  color[] filtered;
   PImage img;
 
   /**
@@ -7,7 +8,8 @@ class Frame {
    *@param PImage
    */
   public Frame(PImage img) {
-    screen = img.pixels;  //save array of pixels 
+    screen = img.pixels;  //save array of pixels
+    filtered = new color[screen.length];
     this.img = img; //save PImage;
   }
 
@@ -97,6 +99,26 @@ class Frame {
       }
     }
   }
+  
+  //uses a double threshold HSB to create a binary image in which the white is lower<color<upper
+  void binaryInRangeFilter(color c1){
+    float h = hue(c1);
+    float[] lowerThresh = {h-10, 100, 100};
+    float[] upperThresh = {h+10, 255, 255};
+    for (int i = 0; i < getSize(); i++){
+      if (inRange(getColor(i), lowerThresh, upperThresh)){ //if the color is within the threshold range
+        screen[i] = color(255); //set it to white
+      }
+      else{
+        screen[i] = color(0); //set to black
+      }
+    }
+  }
+  
+  boolean inRange(color c, float[] lower, float[] upper){
+    return (lower[0] < hue(c) && hue(c) < upper[0]) && (lower[1] < saturation(c) && saturation(c) < upper[1]) && (lower[2] < brightness(c) && brightness(c) < upper[2]);
+  }
+  
   int[][] kernel(int n, int[] coords) {
     int x = coords[0];
     int y = coords[1];

@@ -41,6 +41,7 @@ void draw() {
     surface.setSize(img.width, img.height);
     //currentFrame.mirror(); //mirror the picture
     //currentFrame.sobelFilter(sobel_threshold);
+    currentFrame.binaryInRangeFilter(color(255,255,102));
     currentFrame.draw(); //Display the image
     if (tracked != null) { //if there is a trackedObject, display it
       tracked.draw(currentFrame);//update the object with the new frame and draw it

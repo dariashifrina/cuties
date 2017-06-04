@@ -175,5 +175,6 @@ class Frame {
     int gx=((mat[0][0])+(mat[0][2]*-1)+(mat[1][0]*2)+(mat[1][2]*-2)+(mat[2][0])+(mat[2][2]*-1))/3;
     return Math.sqrt(Math.pow(gy, 2)+Math.pow(gx, 2));
   }
+  
   //========================Major Methods========================
 }

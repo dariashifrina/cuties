@@ -4,7 +4,7 @@ class TrackedObject {
   ArrayList<Integer> objectContained; //collection of object edge pixels
   color chosenColor; //selected color of the pixel
   int pixPos; //position of pixel
-  int _threshold;//maximum value to consider a pixel similar to the object pixel
+  int color_threshold;//maximum value to consider a pixel similar to the object pixel
   boolean[] traversed; //maps to the frame for the pixels traversed. if a pixel is true, it has been traversed on
 
 
@@ -16,11 +16,11 @@ class TrackedObject {
   { 
     this.frame = frame;
     int[] coords = {xcor, ycor};
-    this.pixPos = CCVMath.getXY(coords, frame.getWidth()); //save the target pixel's location in 1d not 2d
+    pixPos = CCVMath.getXY(coords, frame.getWidth()); //save the target pixel's location in 1d not 2d
     chosenColor = frame.getColor(pixPos); //access the color of the target pixel
-    objectContained = new ArrayList();
+    objectContained = new ArrayList(100);//arbitrary size but the object will certaintly be greater than 10 pixels
     traversed = new boolean[frame.getSize()];
-    _threshold = 100;
+    color_threshold = 1500;
   }
 
   //  /**
@@ -28,6 +28,7 @@ class TrackedObject {
   //   */
   void draw(Frame frm)
   {
+    objectContained = new ArrayList(100);
     if (update(frm)) {//if it was successful in updating the object with the new frame, then display it
       //assembles the arraylist containing the desired indices:
       color red = color(255, 0, 0);
@@ -41,8 +42,11 @@ class TrackedObject {
   //Does all of the work. Given a new frame it saves this frame, finds the center of the object from the previous frame and then uses it on the new frame to try and find an edge of the object, when it does, it builds the object by surfing the edge
   boolean update(Frame frm) {
     frame = frm;
+    //frame.blur(1)//perform a small Gaussian blue on the frame to get rid of possible inconsistencies
     boolean success = buildObject();//builds an object after finding an object pixel using the center
-    centerPixPos();//set the reference pixel for the next frame to the center of the object in this frame
+    if (success) {
+      centerPixPos();//set the reference pixel for the next frame to the center of the object in this frame
+    }
     traversed = new boolean[frame.getSize()];//reset the boolean screen
     return success;
   }
@@ -54,42 +58,63 @@ class TrackedObject {
     if (edgePix == -1) {
       return false;
     }
-    //adds the pixels to the array(make a slightly different version of spread)
-    //return true if successful
-    //return false if not
+    addObjPix(edgePix);
     return true;
   }
 
   //returns if the colors at two locations are similar(uses the 3 dimensional color distance assuming that each color is a plane corresponding to x, y, z)
   boolean isSimilar(int p1) {
-    color c1 = frame.screen[p1];
+    color c1 = frame.getColor(p1);
     float r = red(chosenColor) - red(c1);
     float g = green(chosenColor) - green(c1);
     float b = blue(chosenColor) - blue(c1);
     float dist = pow(r, 2)+pow(g, 2)+pow(b, 2);
-    return dist < _threshold;
+    return dist < color_threshold;
+  }
+
+  boolean addObjPix(int pos) {
+    for(int i = pos; i < frame.getSize(); i++){
+      if(isSimilar(i)){
+        objectContained.add(i);
+      }
+    }
+    return true;
+    //traversed[pos] = true;//this pixel has been traversed;
+    //ArrayList<Integer> neighbors = getValidNeighbors(pos);
+    //for (int i : neighbors) { //iterate through the neighbors
+    //  if (isSimilar(i)) {
+    //    objectContained.add(i);
+    //    addObjPix(i);
+    //  }
+    //}
+    //return true;
   }
 
   //Spreads the traversal from itself to its neighbors. returns the edge pixel of the object. if it couldnt find an object pixel, returns -1;
   int spread(int pos) {
-    traversed[pos] = true;//this pixel has been traversed;
-    ArrayList<Integer> neighbors = getValidNeighbors(pos);
-    for (int i : neighbors) { //iterate through the neighbors
-      if (isSimilar(frame.getColor(i))) {
+    for (int i = 0; i < frame.getSize(); i++) {
+      if (isSimilar(i)) {
         return i;
       }
-      return spread(i);
     }
     return -1;
+    //  traversed[pos] = true;//this pixel has been traversed;
+    //  //ArrayList<Integer> neighbors = getValidNeighbors(pos);
+    //  //for (int i : neighbors) { //iterate through the neighbors
+    //  //  if (isSimilar(i)) {
+    //  //    return i;
+    //  //  }
+    //  //  return spread(i);
+    //  //}
+    //  //return -1;
   }
-
+  //
   //returns the neighboring pixels that havent been traversed
   ArrayList<Integer> getValidNeighbors(int pos) {
     ArrayList<Integer> valid = new ArrayList(); //arraylist where the valid neighbors are stored(could be 0, could be 4, so arraylist is easier
     int[] coords = CCVMath.getXY(pos, frame.getWidth()); //get the x, y coords of this point
     int row = coords[0];
     int column = coords[1];
-
     if (column > 0 && traversed[pos-1] != true) {//if it isnt at the starting edge of the row and it hasnt been traveled... 
       valid.add(pos-1);
     }
@@ -98,7 +123,7 @@ class TrackedObject {
       valid.add(pos+1);
     }
 
-    if (row > 0 && traversed[pos-frame.getWidth()] != true) {//if it isnt at the top of the screen and the top pixel hasnt been traversed...
+    if (row > 1 && traversed[pos-frame.getWidth()] != true) {//if it isnt at the top of the screen and the top pixel hasnt been traversed...
       valid.add(pos-frame.getWidth());
     }
     if (row < frame.getHeight() && traversed[pos+frame.getWidth()] != true) {//if it isnt at the bottom of the screen and the bottom pixel hasnt been traversed
@@ -122,5 +147,10 @@ class TrackedObject {
       coords[1] = sumY/objectContained.size();
       pixPos = CCVMath.getXY(coords, frame.getWidth());
     }
+  }
+  
+  void changeThreshold(int delta){
+    color_threshold += delta;
+    print("Color threshold = " + color_threshold);
   }
 }

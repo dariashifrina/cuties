@@ -38,8 +38,9 @@ void draw() {
     //background(0,0,0);
     img = in.getImage();//get the camera's frame
     currentFrame = new Frame(img);//turn that image into a frame for a possible trackedObject
-    currentFrame.mirror(); //mirror the picture
-    currentFrame.sobelFilter(sobel_threshold);
+    surface.setSize(img.width, img.height);
+    //currentFrame.mirror(); //mirror the picture
+    //currentFrame.sobelFilter(sobel_threshold);
     currentFrame.draw(); //Display the image
     if (tracked != null) { //if there is a trackedObject, display it
       tracked.draw(currentFrame);//update the object with the new frame and draw it
@@ -90,5 +91,11 @@ void keyPressed() {
   if (keyCode == DOWN) {
     sobel_threshold -=2;
     println("The Sobel threshold is: " + sobel_threshold);
+  }
+  if(key == 'w' && tracked != null){
+   tracked.changeThreshold(10);
+  }
+  if(key == 's' && tracked != null){
+   tracked.changeThreshold(-10);
   }
 }

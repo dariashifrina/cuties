@@ -58,7 +58,7 @@ void draw() {
       if (tracked == null) {
         println("No tracked object color to filter");
       } else {
-        currentFrame.nonFiltered.pixels = currentFrame.filtered;
+        currentFrame.nonFiltered = currentFrame.screen;
       }
     }
     currentFrame.draw(); //Display the image

@@ -8,7 +8,8 @@ PImage img;
 TrackedObject tracked;
 int state; //0 = in user prompt, 1 = camera, 2 = movie
 UserMenu menu;
-int threshold;
+int sobel_threshold;
+int color_threshold;
 
 void setup() {
   size(600, 480);//adjusts the camera resolution
@@ -18,7 +19,8 @@ void setup() {
   state = 0;
   menu = new UserMenu(width, height);
   in = null;
-  threshold = 224;
+  sobel_threshold = 224;//color threshold to divide the pixels among their local gradient
+  color_threshold = 200;//maximum threshold value to consider a pixel similar to another
 }
 
 /**
@@ -83,11 +85,11 @@ void fileSelected(File selection) {
 
 void keyPressed() {
   if (keyCode == UP) {
-    threshold += 2;
-    println(threshold);
+    sobel_threshold += 2;
+    println(sobel_threshold);
   }
   if (keyCode == DOWN) {
-    threshold -=2;
-    println(threshold);
+    sobel_threshold -=2;
+    println("The Sobel threshold is: " + sobel_threshold);
   }
 }

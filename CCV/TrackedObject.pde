@@ -54,9 +54,7 @@ class TrackedObject {
     if (edgePix == -1) {
       return false;
     }
-    //first filter the frame
-    //ride the wave 8)
-    //add the edge pixels
+    //adds the pixels to the array(make a slightly different version of spread)
     //return true if successful
     //return false if not
     return true;
@@ -125,72 +123,4 @@ class TrackedObject {
       pixPos = CCVMath.getXY(coords, frame.getWidth());
     }
   }
-
-  //void buildObject(int pos)
-  //{
-  //  //gets an array of all the edges:
-  //  LinkedList<Integer> edges = getEdges(pos);
-  //  for (int i: edges) objectContained.add(i);
-  //}
-
-
-  ////  /**
-  ////   *Gets the positions of the neighboring pixels in the order up, down, left, right INSIDE THE 
-  ////   *@return int[]
-  ////   */
-
-  //  //if (pos-frame.getWidth() >= 0 && pos-frame.getWidth() <= frame.getSize() && isSimilar(pos-frame.getWidth(), pos)) {
-
-  ////private ArrayList<Integer> getNeighbors(int pos)
-  ////{
-  ////  ArrayList<Integer> ret = new ArrayList<Integer>(4);
-  ////  //if is in the correct bounds, and it matches the general color, add it to the neighbors that can be checked.
-  ////  //pixel above
-  ////  if (pos-frame.getWidth() >= 0 && pos-frame.getWidth() <= frame.getSize() && isSimilar(pos-frame.getWidth(), pos)) {
-  ////    ret.add(pos-frame.getWidth());
-  ////  }
-  ////  //pixel below
-  ////  if (pos+frame.getWidth() >= 0 && pos+frame.getWidth() <= frame.getSize() && isSimilar(pos+frame.getWidth(), pos)) {
-  ////    ret.add(pos+frame.getWidth());
-  ////  }
-  ////  //to the left:
-  ////  if (pos-1 >= 0 && pos-1 <= frame.getSize() && isSimilar(pos-1, pos)) {
-  ////    ret.add(pos-1);
-  ////  }
-  ////  //to the right:
-  ////  if (pos+1 >= 0 && pos+1 <= frame.getSize() && isSimilar(pos+1, pos)) {
-  ////    ret.add(pos+1);
-  ////  }
-  ////  //mark already visited spots as already visited
-  ////  visited[pos]=true;
-  ////  return ret;
-  ////}
-
-
-  ////  /**
-  ////   *Gets the indices of the edge pixels of the object
-  ////   *@return ArrayList<Integer>
-  ////   */
-  //  LinkedList<Integer> getEdges(int pos) {
-
-  //  //REWRITE THIS WITH OUR OWN LINKEDLIST IMPLEMENTATION LATER:
-  //    LinkedList ret = new LinkedList<Integer>();
-  //    //getNeighbors: gives you an ArrayList of ALL the neighbors
-  //    //if the length of the returned arraylist is less than 4, that means one of the direct neighbors isnt part of the object, so it's an edge. Add it's pos to the arraylist of edges.
-  //    //start at the index pixPos:
-  //    //if you're an edge, add yourself to the list of edges:
-  //    ArrayList<Integer> neighbors = getNeighbors(pos);
-  //    if (neighbors.size() < 4) ret.add(pos);
-  //    for (int i: neighbors) {
-  //          if (!visited[i]) ret.addAll(getEdges(i));
-  //    }
-  //    //if youre a neighbor thats not been checked for edges yet, get checked for edges:
-  //    return ret;
-  //  }
-
-  //   ArrayList<Integer> objectContained = tracked.edges(); 
-  //    color red = color(0, 255, 0);
-  //    for (int i : objectContained) {
-  //      int[] coords = CCVMath.getXY(i, frame.getWidth());
-  //      set(coords[0], coords[1], red);
 }

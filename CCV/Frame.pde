@@ -106,13 +106,15 @@ class Frame {
     int[][] k = new int[n*2+1][n*2+1];
     //from top left to bottom right:
     for (int i = -y; i <=y; i++) {
+      //if out of array bounds because negative, use a mirror:
       ysgn = 1;
-      if (i < 0) ysgn = -1;
+      if (i+n < 0) ysgn = -1;
       for (int j = -x; j <= x; j++) {
         xsgn = 1;
-        if (j < 0) xsgn = -1;
+        //if out of array bounds because negative, use a mirror:
+        if (j+n < 0) xsgn = -1;
         coords[0]=(xsgn*(n+i));
-        coords[1]=(ysgn*n+i);
+        coords[1]=(ysgn*(j+i));
         k[coords[0]][coords[1]] = getColor(coords);
       }
     }
@@ -130,32 +132,32 @@ class Frame {
       for (int j=1; j< getHeight()-1; j++) { //iterate through each pixel and get its neighbors. Get their intensities to form a color matrix to approximate the local intensity vector gradient
         coord[0] = i-1;
         coord[1] = j-1;
-        //mat = kernel(1, coord);
-        mat[0][0] = (int)brightness(getColor( coord ));
-        coord[0] = i-1;
-        coord[1] = j;
-        mat[0][1] = (int)brightness(getColor( coord ));
-        coord[0] = i-1;
-        coord[1] = j+1;  
-        mat[0][2] = (int)brightness(getColor( coord ));
-        coord[0] = i;
-        coord[1] = j-1;  
-        mat[1][0] = (int)brightness(getColor( coord ));
-        coord[0] = i;
-        coord[1] = j+1;  
-        mat[1][2] = (int)brightness(getColor( coord ));
-        coord[0] = i+1;
-        coord[1] = j-1;  
-        mat[2][0] = (int)brightness(getColor( coord ));
-        coord[0] = i+1;
-        coord[1] = j;  
-        mat[2][1] = (int)brightness(getColor( coord ));
-        coord[0] = i+1;
-        coord[1] = j+1;  
-        mat[2][2] = (int)brightness(getColor( coord ));
+        mat = kernel(1, coord);
+        //mat[0][0] = (int)brightness(getColor( coord ));
+        //coord[0] = i-1;
+        //coord[1] = j;
+        //mat[0][1] = (int)brightness(getColor( coord ));
+        //coord[0] = i-1;
+        //coord[1] = j+1;  
+        //mat[0][2] = (int)brightness(getColor( coord ));
+        //coord[0] = i;
+        //coord[1] = j-1;  
+        //mat[1][0] = (int)brightness(getColor( coord ));
+        //coord[0] = i;
+        //coord[1] = j+1;  
+        //mat[1][2] = (int)brightness(getColor( coord ));
+        //coord[0] = i+1;
+        //coord[1] = j-1;  
+        //mat[2][0] = (int)brightness(getColor( coord ));
+        //coord[0] = i+1;
+        //coord[1] = j;  
+        //mat[2][1] = (int)brightness(getColor( coord ));
+        //coord[0] = i+1;
+        //coord[1] = j+1;  
+        //mat[2][2] = (int)brightness(getColor( coord ));
         int edge = (int)convolution(mat);
-        coord[0] = i;
-        coord[1] = j;
+        //coord[0] = i;
+        //coord[1] = j;
         if(edge >= threshold){
           edge = 255;
         }

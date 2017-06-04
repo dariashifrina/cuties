@@ -1,6 +1,7 @@
 class Frame {
   color[] screen;
   color[] filtered;
+  PImage nonFiltered;
   PImage img;
 
   /**
@@ -11,11 +12,12 @@ class Frame {
     screen = img.pixels;  //save array of pixels
     filtered = new color[screen.length];
     this.img = img; //save PImage;
+    nonFiltered = img.copy();
   }
 
   void draw() {
     // img.updatePixels();
-    image(img, 0, 0);
+    image(nonFiltered, 0, 0);
   }
 
   //========================Helper Functions========================
@@ -102,10 +104,10 @@ class Frame {
   }
 
   //uses a double threshold HSB to create a binary image in which the white is lower<color<upper
-  void binaryInRangeFilter(color c1) {
+  void binaryInRangeFilter(color c1, int delta) {
     float h = hue(c1);
-    float[] lowerThresh = {h-10, 100, 100};
-    float[] upperThresh = {h+10, 255, 255};
+    float[] lowerThresh = {h-delta, 100, 100};
+    float[] upperThresh = {h+delta, 255, 255};
     for (int i = 0; i < getSize(); i++) {
       if (inRange(getColor(i), lowerThresh, upperThresh)) { //if the color is within the threshold range
         filtered[i] = color(255); //set it to white
@@ -114,6 +116,7 @@ class Frame {
       }
     }
     img.pixels = filtered;
+    screen = filtered;
     //dilate();
   }
 

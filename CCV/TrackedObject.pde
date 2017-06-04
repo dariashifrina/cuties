@@ -18,7 +18,7 @@ class TrackedObject {
     pixPos = CCVMath.getXY(coords, frame.getWidth()); //save the target pixel's location in 1d not 2d
     chosenColor = frame.getColor(pixPos); //access the color of the target pixel
     objectContained = new ArrayList(100);//arbitrary size but the object will certaintly be greater than 10 pixels
-    color_threshold = 1500;
+    color_threshold = 10;
   }
 
   //  /**
@@ -34,15 +34,13 @@ class TrackedObject {
         int[] coords = CCVMath.getXY(i, frame.getWidth());
         set(coords[0], coords[1], red);
       }
-    } else {
-      print("Object lost...searching in next frame...");
     }
   }
 
   //Does all of the work. Given a new frame it saves this frame, finds the center of the object from the previous frame and then uses it on the new frame to try and find an edge of the object, when it does, it builds the object by surfing the edge
   boolean update(Frame frm) {
     frame = frm;
-    frame.binaryInRangeFilter(chosenColor);
+    frame.binaryInRangeFilter(chosenColor, color_threshold);
     boolean success = buildObject();//builds an object after finding an object pixel using the center
     if (success) {
       centerPixPos();//set the reference pixel for the next frame to the center of the object in this frame
@@ -54,7 +52,7 @@ class TrackedObject {
   //Travels around the edge of the object, adding the edges pixel positions to the objectContained list
   boolean buildObject() {
     for (int i = 0; i < frame.getSize(); i++) {
-      if (red(frame.getColor(i)) == 255) {
+      if (frame.getColor(i) == color(255)) {
         objectContained.add(i);
       }
     }
@@ -72,15 +70,6 @@ class TrackedObject {
     float b = blue(chosenColor) - blue(c1);
     float dist = pow(r, 2)+pow(g, 2)+pow(b, 2);
     return dist < color_threshold;
-  }
-
-  boolean addObjPix(int pos) {
-    for (int i = pos; i < frame.getSize(); i++) {
-      if (isSimilar(i)) {
-        objectContained.add(i);
-      }
-    }
-    return true;
   }
 
   //Finds the center of the object by summing the coordinates of the edge pixels. If buildObject wasnt successful, it uses the previous frame's position again because that is the object's last known position

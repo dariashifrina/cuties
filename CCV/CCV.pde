@@ -3,7 +3,6 @@
  * APCS2 Pd3
  */
 Frame currentFrame;
-Frame displayFrame;
 VideoStream in;
 PImage img;
 TrackedObject tracked;
@@ -44,7 +43,6 @@ void draw() {
   else {
     img = in.getImage();//get the camera's frame
     currentFrame = new Frame(img);//turn that image into a frame for a possible trackedObject
-    displayFrame = new Frame(img);
     try {
       surface.setSize(img.width, img.height);
     } 
@@ -52,16 +50,19 @@ void draw() {
       println("Resize error! Trying again on next Frame...");
     }
     if (mirrored) {
-      displayFrame.mirror(); //mirror the picture
-      currentFrame.mirror();
+      currentFrame.mirror(); //mirror the picture
     }
     if (sobelFiltered) {
-      displayFrame.sobelFilter(sobel_threshold);
+      currentFrame.sobelFilter(sobel_threshold);
     }
     if (hsbFiltered) {
-      displayFrame.binaryInRangeFilter(tracked.chosenColor);
+      if (tracked == null) {
+        println("No tracked object color to filter");
+      } else {
+        currentFrame.binaryInRangeFilter(tracked.chosenColor, tracked.color_threshold);
+      }
     }
-    displayFrame.draw(); //Display the image
+    currentFrame.draw(); //Display the image
     if (tracked != null) { //if there is a trackedObject, display it
       tracked.draw(currentFrame);//update the object with the new frame and draw it
     }
@@ -116,10 +117,10 @@ void keyPressed() {
     exit();
   }
   if (key == 'w' && tracked != null) {
-    tracked.changeThreshold(10);
+    tracked.changeThreshold(2);
   }
   if (key == 's' && tracked != null) {
-    tracked.changeThreshold(-10);
+    tracked.changeThreshold(-2);
   }
   if (key == 'm') {
     mirrored = !mirrored;

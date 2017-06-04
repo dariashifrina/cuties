@@ -78,10 +78,10 @@ void draw() {
 /**
  *Creates a trackedObject at the mouse's position
  */
-void mouseClicked() {
+void mouseReleased() {//ensures that it only happens once vs mouse clicked
   if (state == 0) { //if you are in the user menu
     int toBeState; //Handles threading in the case of state 2 so the draw method doesn't get ahead of the mouseClicked()
-    toBeState = menu.mouseClicked(); //calls mouseClicked of menu to check if the mouse is in the buttons
+    toBeState = menu.mouseReleased(); //calls mouseClicked of menu to check if the mouse is in the buttons
     if (toBeState == 1) {
       in = new Camera(this);
       state = toBeState;
@@ -108,30 +108,48 @@ void fileSelected(File selection) {
 }
 
 void keyPressed() {
-  if (keyCode == UP) {
+  if (key == 'r') {
     sobel_threshold += 2;
     println("The Sobel threshold is now: " + sobel_threshold);
   }
-  if (keyCode == DOWN) {
+  if (keyCode == 'f') {
     sobel_threshold -=2;
     println("The Sobel threshold is now: " + sobel_threshold);
   }
   if (keyCode == ESC) {
     exit();
   }
+  if (key == 'q' && tracked != null) {
+    tracked.hue_threshold += 5;
+    println("The hue threshold is now: " + tracked.hue_threshold);
+  }
+  if (key == 'a' && tracked != null) {
+    tracked.hue_threshold -= 5;
+    println("The hue threshold is now: " + tracked.hue_threshold);
+  } 
   if (key == 'w' && tracked != null) {
-    tracked.changeThreshold(2);
+    tracked.saturation_threshold += 5;
+    println("The saturation threshold is now: " + tracked.saturation_threshold);
   }
   if (key == 's' && tracked != null) {
-    tracked.changeThreshold(-2);
+    tracked.saturation_threshold -= 5;
+    println("The saturation threshold is now: " + tracked.saturation_threshold);
   }
-  if (key == 'm') {
+  if (key == 'e' && tracked != null) {
+    tracked.brightness_threshold += 5;
+    println("The brightness threshold is now: " + tracked.brightness_threshold);
+  }
+  if (key == 'd' && tracked != null) {
+    tracked.brightness_threshold -= 5;
+    println("The brightness threshold is now: " + tracked.brightness_threshold);
+  }
+  if (keyCode == UP) {
     mirrored = !mirrored;
   }
-  if (key == 'e') {
+  if (keyCode == LEFT) {
     sobelFiltered = !sobelFiltered;
   }
-  if (key == 'h') {
+  if (keyCode == DOWN) {
     hsbFiltered = !hsbFiltered;
   }
 }

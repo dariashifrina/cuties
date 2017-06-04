@@ -104,10 +104,12 @@ class Frame {
   }
 
   //uses a double threshold HSB to create a binary image in which the white is lower<color<upper
-  void binaryInRangeFilter(color c1, int delta) {
+  void binaryInRangeFilter(color c1, int delta1, int delta2, int delta3) {
     float h = hue(c1);
-    float[] lowerThresh = {h-delta, 100, 100};
-    float[] upperThresh = {h+delta, 255, 255};
+    float s = saturation(c1);
+    float b = brightness(c1);
+    float[] lowerThresh = {h-delta1, s-delta2, b-delta3};
+    float[] upperThresh = {h+delta1, s+delta2, b+delta3};
     for (int i = 0; i < getSize(); i++) {
       if (inRange(getColor(i), lowerThresh, upperThresh)) { //if the color is within the threshold range
         filtered[i] = color(255); //set it to white
@@ -117,6 +119,8 @@ class Frame {
     }
     img.pixels = filtered;
     screen = filtered;
+    img.filter(ERODE);
+    img.filter(DILATE);
     //dilate();
   }
 

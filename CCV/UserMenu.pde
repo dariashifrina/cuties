@@ -31,7 +31,7 @@ class UserMenu {
     text("Select a video feed type", xCenter, 60);
   }
 
-  int mouseClicked() {
+  int mouseReleased() {
     if (mouseY < yCenter + buttonHeight/2 && mouseY > yCenter - buttonHeight/2) {
       if (mouseX > xCenter - buttonOffset - buttonWidth/2 && mouseX < xCenter + buttonWidth/2 - buttonOffset) {//if the mouse is within the Camera ellipse, return the 1 state
         return 1;

@@ -4,8 +4,9 @@ class TrackedObject {
   ArrayList<Integer> objectContained; //collection of object edge pixels
   color chosenColor; //selected color of the pixel
   int pixPos; //position of pixel
-  int color_threshold;//maximum value to consider a pixel similar to the object pixel
-
+  int hue_threshold;//increases 2 level threshold range for hue
+  int saturation_threshold;//increases 2 level threshold range for saturation
+  int brightness_threshold;//increases 2 level threshold range for brightness
 
   //  /**
   //   *Constructs the TrackedObject
@@ -18,7 +19,9 @@ class TrackedObject {
     pixPos = CCVMath.getXY(coords, frame.getWidth()); //save the target pixel's location in 1d not 2d
     chosenColor = frame.getColor(pixPos); //access the color of the target pixel
     objectContained = new ArrayList(100);//arbitrary size but the object will certaintly be greater than 10 pixels
-    color_threshold = 10;
+    hue_threshold = 80; //through experimentation
+    saturation_threshold = 80;
+    brightness_threshold = 80;
   }
 
   //  /**
@@ -40,7 +43,7 @@ class TrackedObject {
   //Does all of the work. Given a new frame it saves this frame, finds the center of the object from the previous frame and then uses it on the new frame to try and find an edge of the object, when it does, it builds the object by surfing the edge
   boolean update(Frame frm) {
     frame = frm;
-    frame.binaryInRangeFilter(chosenColor, color_threshold);
+    frame.binaryInRangeFilter(chosenColor, hue_threshold, saturation_threshold, brightness_threshold);
     boolean success = buildObject();//builds an object after finding an object pixel using the center
     if (success) {
       centerPixPos();//set the reference pixel for the next frame to the center of the object in this frame

@@ -10,6 +10,7 @@ int state; //0 = in user prompt, 1 = camera, 2 = movie
 UserMenu menu;
 int sobel_threshold;
 int color_threshold;
+boolean resized;
 
 void setup() {
   size(600, 480);//adjusts the camera resolution
@@ -21,6 +22,7 @@ void setup() {
   in = null;
   sobel_threshold = 224;//color threshold to divide the pixels among their local gradient
   color_threshold = 200;//maximum threshold value to consider a pixel similar to another
+  resized = false;
 }
 
 /**
@@ -38,10 +40,19 @@ void draw() {
     //background(0,0,0);
     img = in.getImage();//get the camera's frame
     currentFrame = new Frame(img);//turn that image into a frame for a possible trackedObject
-    surface.setSize(img.width, img.height);
+    if (!resized) {
+      try {
+        surface.setSize(img.width, img.height);
+        resized = true;
+      } 
+      catch(IllegalArgumentException e) {
+        println("Resize error! Trying again on next Frame...");
+        resized = false;
+      }
+    }
     //currentFrame.mirror(); //mirror the picture
     //currentFrame.sobelFilter(sobel_threshold);
-    currentFrame.binaryInRangeFilter(color(255,255,102));
+    currentFrame.binaryInRangeFilter(color(255, 255, 102));
     currentFrame.draw(); //Display the image
     if (tracked != null) { //if there is a trackedObject, display it
       tracked.draw(currentFrame);//update the object with the new frame and draw it
@@ -93,13 +104,13 @@ void keyPressed() {
     sobel_threshold -=2;
     println("The Sobel threshold is: " + sobel_threshold);
   }
-  if(keyCode == ESC){
+  if (keyCode == ESC) {
     exit();
   }
-  if(key == 'w' && tracked != null){
-   tracked.changeThreshold(10);
+  if (key == 'w' && tracked != null) {
+    tracked.changeThreshold(10);
   }
-  if(key == 's' && tracked != null){
-   tracked.changeThreshold(-10);
+  if (key == 's' && tracked != null) {
+    tracked.changeThreshold(-10);
   }
 }

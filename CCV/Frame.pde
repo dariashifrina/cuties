@@ -115,6 +115,7 @@ class Frame {
     }
   }
   
+  //returns true if the color is within the ranges for hue, saturation, and brightness
   boolean inRange(color c, float[] lower, float[] upper){
     return (lower[0] < hue(c) && hue(c) < upper[0]) && (lower[1] < saturation(c) && saturation(c) < upper[1]) && (lower[2] < brightness(c) && brightness(c) < upper[2]);
   }

@@ -42,31 +42,34 @@ void draw() {
   //Main loop
   else {
     img = in.getImage();//get the camera's frame
-    currentFrame = new Frame(img);//turn that image into a frame for a possible trackedObject
-    try {
-      surface.setSize(img.width, img.height);
-    } 
-    catch(IllegalArgumentException e) {
-      println("Resize error! Trying again on next Frame...");
-    }
-    if (mirrored) {
-      currentFrame.mirror(); //mirror the picture
-    }
-    if (sobelFiltered) {
-      currentFrame.sobelFilter(sobel_threshold);
-    }
-    if (hsbFiltered) {
-      if (tracked == null) {
-        println("No tracked object color to filter");
-      } else {
-        currentFrame.binaryInRangeFilter(tracked.chosenColor, tracked.color_threshold);
+    if (img.height == 0 || img.width == 0) { //if a speghetti frame was fed in, dont do anything
+    } else {
+      currentFrame = new Frame(img);//turn that image into a frame for a possible trackedObject
+      try {
+        surface.setSize(img.width, img.height); //try to resize the frame to its proper size
+      } 
+      catch(Exception e) {
+        println("Resize error! Trying again on next Frame...");
       }
+      if (mirrored) {
+        currentFrame.mirror(); //mirror the picture
+      }
+      if (sobelFiltered) {
+        currentFrame.sobelFilter(sobel_threshold);
+      }
+      if (hsbFiltered) {
+        if (tracked == null) {
+          println("No tracked object color to filter");
+        } else {
+          currentFrame.nonFiltered.pixels = currentFrame.filtered;
+        }
+      }
+      currentFrame.draw(); //Display the image
+      if (tracked != null) { //if there is a trackedObject, display it
+        tracked.draw(currentFrame);//update the object with the new frame and draw it
+      }
+      System.gc();
     }
-    currentFrame.draw(); //Display the image
-    if (tracked != null) { //if there is a trackedObject, display it
-      tracked.draw(currentFrame);//update the object with the new frame and draw it
-    }
-    System.gc();
   }
 }
 

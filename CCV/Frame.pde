@@ -1,22 +1,21 @@
 class Frame {
   color[] screen;
   color[] filtered;
-  PImage nonFiltered;
   PImage img;
+  PImage nonFiltered;
 
   /**
    *Constructs a Frame object
    *@param PImage
    */
   public Frame(PImage img) {
+    this.img = img; //save PImage;
     screen = img.pixels;  //save array of pixels
     filtered = new color[screen.length];
-    this.img = img; //save PImage;
     nonFiltered = img.copy();
   }
 
   void draw() {
-    // img.updatePixels();
     image(nonFiltered, 0, 0);
   }
 
@@ -101,6 +100,7 @@ class Frame {
         swapColors(coords1, coords2);
       }
     }
+    nonFiltered = img.copy();
   }
 
   //uses a double threshold HSB to create a binary image in which the white is lower<color<upper
@@ -194,7 +194,7 @@ class Frame {
         filtered[i + j*img.width] =  color(edge);
       }
     }
-    img.pixels = filtered;
+    nonFiltered.pixels = filtered;
   }
 
   //Convolutes the matrix according to the kernel x and kernel y derivative matrices in the sobel operation to form a vector gradient number

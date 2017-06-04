@@ -92,6 +92,9 @@ void keyPressed() {
     sobel_threshold -=2;
     println("The Sobel threshold is: " + sobel_threshold);
   }
+  if(keyCode == ESC){
+    exit();
+  }
   if(key == 'w' && tracked != null){
    tracked.changeThreshold(10);
   }

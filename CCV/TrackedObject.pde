@@ -34,12 +34,15 @@ class TrackedObject {
         int[] coords = CCVMath.getXY(i, frame.getWidth());
         set(coords[0], coords[1], red);
       }
+    } else {
+      print("Object lost...searching in next frame...");
     }
   }
 
   //Does all of the work. Given a new frame it saves this frame, finds the center of the object from the previous frame and then uses it on the new frame to try and find an edge of the object, when it does, it builds the object by surfing the edge
   boolean update(Frame frm) {
     frame = frm;
+    frame.binaryInRangeFilter(chosenColor);
     boolean success = buildObject();//builds an object after finding an object pixel using the center
     if (success) {
       centerPixPos();//set the reference pixel for the next frame to the center of the object in this frame
@@ -50,11 +53,14 @@ class TrackedObject {
   //=======================Helper Functions ================================
   //Travels around the edge of the object, adding the edges pixel positions to the objectContained list
   boolean buildObject() {
-    int edgePix = spread(pixPos);
-    if (edgePix == -1) {
+    for (int i = 0; i < frame.getSize(); i++) {
+      if (red(frame.getColor(i)) == 255) {
+        objectContained.add(i);
+      }
+    }
+    if (objectContained.size() == 0) {
       return false;
     }
-    addObjPix(edgePix);
     return true;
   }
 
@@ -69,24 +75,14 @@ class TrackedObject {
   }
 
   boolean addObjPix(int pos) {
-    for(int i = pos; i < frame.getSize(); i++){
-      if(isSimilar(i)){
+    for (int i = pos; i < frame.getSize(); i++) {
+      if (isSimilar(i)) {
         objectContained.add(i);
       }
     }
     return true;
   }
 
-  //Spreads the traversal from itself to its neighbors. returns the edge pixel of the object. if it couldnt find an object pixel, returns -1;
-  int spread(int pos) {
-    for (int i = 0; i < frame.getSize(); i++) {
-      if (isSimilar(i)) {
-        return i;
-      }
-    }
-    return -1;
-  }
-  
   //Finds the center of the object by summing the coordinates of the edge pixels. If buildObject wasnt successful, it uses the previous frame's position again because that is the object's last known position
   void centerPixPos() {
     int sumX = 0;
@@ -103,8 +99,8 @@ class TrackedObject {
       pixPos = CCVMath.getXY(coords, frame.getWidth());
     }
   }
-  
-  void changeThreshold(int delta){
+
+  void changeThreshold(int delta) {
     color_threshold += delta;
     print("Color threshold = " + color_threshold);
   }

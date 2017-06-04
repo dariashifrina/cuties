@@ -3,6 +3,7 @@
  * APCS2 Pd3
  */
 Frame currentFrame;
+Frame displayFrame;
 VideoStream in;
 PImage img;
 TrackedObject tracked;
@@ -10,7 +11,9 @@ int state; //0 = in user prompt, 1 = camera, 2 = movie
 UserMenu menu;
 int sobel_threshold;
 int color_threshold;
-boolean resized;
+boolean mirrored;//true if the user wants the display to be mirrored
+boolean sobelFiltered; //true if the user wants to see the sobel Filter on the screen
+boolean hsbFiltered; //true if the user wants to see the hsb filter on the screen
 
 void setup() {
   size(600, 480);//adjusts the camera resolution
@@ -20,9 +23,11 @@ void setup() {
   state = 0;
   menu = new UserMenu(width, height);
   in = null;
-  sobel_threshold = 224;//color threshold to divide the pixels among their local gradient
+  sobel_threshold = 60;//color threshold to divide the pixels among their local gradient
   color_threshold = 200;//maximum threshold value to consider a pixel similar to another
-  resized = false;
+  mirrored = false;
+  sobelFiltered = false;
+  hsbFiltered = false;
 }
 
 /**
@@ -37,23 +42,26 @@ void draw() {
 
   //Main loop
   else {
-    //background(0,0,0);
     img = in.getImage();//get the camera's frame
     currentFrame = new Frame(img);//turn that image into a frame for a possible trackedObject
-    if (!resized) {
-      try {
-        surface.setSize(img.width, img.height);
-        resized = true;
-      } 
-      catch(IllegalArgumentException e) {
-        println("Resize error! Trying again on next Frame...");
-        resized = false;
-      }
+    displayFrame = new Frame(img);
+    try {
+      surface.setSize(img.width, img.height);
+    } 
+    catch(IllegalArgumentException e) {
+      println("Resize error! Trying again on next Frame...");
     }
-    //currentFrame.mirror(); //mirror the picture
-    //currentFrame.sobelFilter(sobel_threshold);
-    currentFrame.binaryInRangeFilter(color(255, 255, 102));
-    currentFrame.draw(); //Display the image
+    if (mirrored) {
+      displayFrame.mirror(); //mirror the picture
+      currentFrame.mirror();
+    }
+    if (sobelFiltered) {
+      displayFrame.sobelFilter(sobel_threshold);
+    }
+    if (hsbFiltered) {
+      displayFrame.binaryInRangeFilter(tracked.chosenColor);
+    }
+    displayFrame.draw(); //Display the image
     if (tracked != null) { //if there is a trackedObject, display it
       tracked.draw(currentFrame);//update the object with the new frame and draw it
     }
@@ -98,11 +106,11 @@ void fileSelected(File selection) {
 void keyPressed() {
   if (keyCode == UP) {
     sobel_threshold += 2;
-    println(sobel_threshold);
+    println("The Sobel threshold is now: " + sobel_threshold);
   }
   if (keyCode == DOWN) {
     sobel_threshold -=2;
-    println("The Sobel threshold is: " + sobel_threshold);
+    println("The Sobel threshold is now: " + sobel_threshold);
   }
   if (keyCode == ESC) {
     exit();
@@ -112,5 +120,14 @@ void keyPressed() {
   }
   if (key == 's' && tracked != null) {
     tracked.changeThreshold(-10);
+  }
+  if (key == 'm') {
+    mirrored = !mirrored;
+  }
+  if (key == 'e') {
+    sobelFiltered = !sobelFiltered;
+  }
+  if (key == 'h') {
+    hsbFiltered = !hsbFiltered;
   }
 }

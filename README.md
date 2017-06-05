@@ -67,3 +67,7 @@ HSB transforms the RGB cartesian cube into a more intuitive system in the form o
 ![alt text](https://i.stack.imgur.com/dvHEX.png)
 ![alt text](https://upload.wikimedia.org/wikipedia/commons/0/05/RGB_Cube_Show_lowgamma_cutout_a.png)
 Additionally, a double threshold cannot be implemented in RGB because you can only calculate color distance using the 3D cartesian cube, thus leading to a less accurate filter.
+
+**Sobel Edge Detection Filter**:
+
+# What we would have done if given more time

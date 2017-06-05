@@ -21,7 +21,8 @@ class Camera implements VideoStream {
       cam.read();
     }
     else {
-      return createImage(0,0,0);
+      println("no frame");
+      return createImage(2000,2000,0);
     }
     return (PImage) cam;
   }

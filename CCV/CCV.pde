@@ -19,7 +19,7 @@ void setup() {
   size(600, 480);//adjusts the camera resolution
   background(0);
   surface.setResizable(true);
-  frameRate(60);
+  frameRate(15);
   state = 0;
   menu = new UserMenu(width, height);
   in = null;

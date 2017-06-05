@@ -46,6 +46,8 @@ void draw() {
     currentFrame = new Frame(img);//turn that image into a frame for a possible trackedObject
     if (img.height == 0 || img.width == 0) {
     } else {
+      //which type do you want displayed?
+      color[] displayed = currentFrame.nonFiltered;
       if (!resized) {
         surface.setSize(max(img.width,600), max(img.height,480)); //try to resize the frame to its proper size
         resized = true;
@@ -55,21 +57,25 @@ void draw() {
       }
       if (sobelFiltered) {
         currentFrame.sobelFilter(sobel_threshold);
+        //we now want to display the one that has a sobel_threshold put on it:
+        displayed = currentFrame.filtered;
       }
       if (hsbFiltered) {
         if (tracked == null) {
           println("No tracked object color to filter");
         } else {
-          currentFrame.nonFiltered = currentFrame.screen;
+          displayed = currentFrame.screen;
         }
       }
-      currentFrame.draw(); //Display the image
+      currentFrame.draw(displayed); //Display the image
       if (tracked != null) { //if there is a trackedObject, display it
         tracked.draw(currentFrame);//update the object with the new frame and draw it
       }
       System.gc();
-    }
+    }  
+    
   }
+  
 }
 
 

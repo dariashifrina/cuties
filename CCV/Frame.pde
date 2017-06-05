@@ -1,8 +1,8 @@
 class Frame {
   color[] screen;
+  color[] nonFiltered;
   color[] filtered;
   PImage img;
-  color[] nonFiltered;
 
   /**
    *Constructs a Frame object
@@ -16,8 +16,8 @@ class Frame {
     arrayCopy(screen, nonFiltered);
   }
 
-  void draw() {
-    img.pixels = nonFiltered;
+  void draw(color[] type) {
+    img.pixels = type;
     image(img, 0, 0);
   }
 
@@ -38,6 +38,10 @@ class Frame {
   color getColor(int[] coords) {
     return screen[CCVMath.getXY(coords, img.width)];
   }
+  color getColor1(int pos) {
+    return nonFiltered[pos];
+  }
+
 
   /**
    *Gets the color of the pixel at the given position
@@ -199,7 +203,6 @@ class Frame {
         filtered[i + j*img.width] =  color(edge);
       }
     }
-    nonFiltered = filtered;
   }
 
   //Convolutes the matrix according to the kernel x and kernel y derivative matrices in the sobel operation to form a vector gradient number

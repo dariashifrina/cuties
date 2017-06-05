@@ -17,7 +17,7 @@ class TrackedObject {
     this.frame = frame;
     int[] coords = {xcor, ycor};
     pixPos = CCVMath.getXY(coords, frame.getWidth()); //save the target pixel's location in 1d not 2d
-    chosenColor = frame.getColor(pixPos); //access the color of the target pixel
+    chosenColor = frame.getColor1(pixPos); //access the color of the target pixel
     objectContained = new ArrayList(100);//arbitrary size but the object will certaintly be greater than 10 pixels
     hue_threshold = 80; //through experimentation
     saturation_threshold = 80;

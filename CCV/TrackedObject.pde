@@ -54,7 +54,6 @@ class TrackedObject {
     boolean success = buildObject();//builds an object after finding an object pixel using the center
     if (success) {
       centerPixPos();//set the reference pixel for the next frame to the center of the object in this frame
-      chosenColor = frame.nonFiltered[pixPos];
     }
     return success;
   }
@@ -99,6 +98,19 @@ class TrackedObject {
       pixPos = CCVMath.getXY(coords, frame.getWidth());
       trace.add(pixPos);
     }
+  }
+
+  //returns the average color of the object
+  color averageColor() {
+    int red = 0;
+    int green = 0;
+    int blue = 0;
+    for (int i : objectContained) {
+      red += red(frame.nonFiltered[i]);
+      green += green(frame.nonFiltered[i]);
+      blue += blue(frame.nonFiltered[i]);
+    }
+    return color(red/objectContained.size(), green/objectContained.size(), blue/objectContained.size());
   }
 
   void changeThreshold(int delta) {

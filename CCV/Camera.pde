@@ -20,6 +20,9 @@ class Camera implements VideoStream {
     if (cam.available()) {
       cam.read();
     }
+    else {
+      return createImage(0,0,0);
+    }
     return (PImage) cam;
   }
 }

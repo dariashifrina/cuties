@@ -44,28 +44,31 @@ void draw() {
   else {
     img = in.getImage();//get the camera's frame
     currentFrame = new Frame(img);//turn that image into a frame for a possible trackedObject
-    if (!resized) {
-      surface.setSize(max(img.width,600), max(img.height,480)); //try to resize the frame to its proper size
-      resized = true;
-    } 
-    if (mirrored) {
-      currentFrame.mirror(); //mirror the picture
-    }
-    if (sobelFiltered) {
-      currentFrame.sobelFilter(sobel_threshold);
-    }
-    if (hsbFiltered) {
-      if (tracked == null) {
-        println("No tracked object color to filter");
-      } else {
-        currentFrame.nonFiltered = currentFrame.screen;
+    if (img.height == 0 || img.width == 0) {
+    } else {
+      if (!resized) {
+        surface.setSize(max(img.width,600), max(img.height,480)); //try to resize the frame to its proper size
+        resized = true;
+      } 
+      if (mirrored) {
+        currentFrame.mirror(); //mirror the picture
       }
+      if (sobelFiltered) {
+        currentFrame.sobelFilter(sobel_threshold);
+      }
+      if (hsbFiltered) {
+        if (tracked == null) {
+          println("No tracked object color to filter");
+        } else {
+          currentFrame.nonFiltered = currentFrame.screen;
+        }
+      }
+      currentFrame.draw(); //Display the image
+      if (tracked != null) { //if there is a trackedObject, display it
+        tracked.draw(currentFrame);//update the object with the new frame and draw it
+      }
+      System.gc();
     }
-    currentFrame.draw(); //Display the image
-    if (tracked != null) { //if there is a trackedObject, display it
-      tracked.draw(currentFrame);//update the object with the new frame and draw it
-    }
-    System.gc();
   }
 }
 

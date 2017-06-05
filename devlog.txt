@@ -116,4 +116,9 @@ James: Created the outward traversal algorithm, continued working on the Tracked
 --------------------------------------------------------------
 James: Completed a custom sobel edge detection filter. Turned out to be too inconsistent to be used in tracking, but we are going to keep it as a feature in the program and to possibly use in motion detection if we get to it!
 ==============================================================
+
+2017-06-04
+--------------------------------------------------------------
+James: Since sobel edge detection wasnt reliable, I wrote a double threshold HSB filter. Debugged the program, added buttons, cleaned up code.
+==============================================================
 ==================================================

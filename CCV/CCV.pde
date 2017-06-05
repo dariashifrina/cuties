@@ -19,7 +19,7 @@ void setup() {
   size(600, 480);//adjusts the camera resolution
   background(0);
   surface.setResizable(true);
-  frameRate(15);
+  frameRate(60);
   state = 0;
   menu = new UserMenu(width, height);
   in = null;
@@ -49,7 +49,7 @@ void draw() {
       //which type do you want displayed?
       color[] displayed = currentFrame.nonFiltered;
       if (!resized) {
-        surface.setSize(max(img.width,600), max(img.height,480)); //try to resize the frame to its proper size
+        surface.setSize(max(img.width, 600), max(img.height, 480)); //try to resize the frame to its proper size
         resized = true;
       } 
       if (mirrored) {
@@ -60,22 +60,19 @@ void draw() {
         //we now want to display the one that has a sobel_threshold put on it:
         displayed = currentFrame.filtered;
       }
-      if (hsbFiltered) {
-        if (tracked == null) {
-          println("No tracked object color to filter");
-        } else {
-          displayed = currentFrame.screen;
+      if (hsbFiltered && tracked != null) {
+        displayed = currentFrame.screen;
+        tracked.update(currentFrame); //update the info BUT DONT DISPLAY IT, the next line will do that for you:
+        currentFrame.draw(displayed);
+      } else {
+        currentFrame.draw(displayed);
+        if (tracked != null) { //if there is a trackedObject, display it
+          tracked.draw(currentFrame);//update the object with the new frame and draw it
         }
       }
-      currentFrame.draw(displayed); //Display the image
-      if (tracked != null) { //if there is a trackedObject, display it
-        tracked.draw(currentFrame);//update the object with the new frame and draw it
-      }
-      System.gc();
-    }  
-    
+    }
   }
-  
+  System.gc();
 }
 
 
@@ -114,11 +111,11 @@ void fileSelected(File selection) {
 
 void keyPressed() {
   if (key == 'r') {
-    sobel_threshold += 2;
+    sobel_threshold += 5;
     println("The Sobel threshold is now: " + sobel_threshold);
   }
-  if (keyCode == 'f') {
-    sobel_threshold -=2;
+  if (key == 'f') {
+    sobel_threshold -= 5;
     println("The Sobel threshold is now: " + sobel_threshold);
   }
   if (keyCode == ESC) {
@@ -156,5 +153,8 @@ void keyPressed() {
   }
   if (keyCode == DOWN) {
     hsbFiltered = !hsbFiltered;
+  }
+  if(keyCode == BACKSPACE){
+    tracked = null;
   }
 }

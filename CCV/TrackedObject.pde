@@ -54,6 +54,7 @@ class TrackedObject {
     boolean success = buildObject();//builds an object after finding an object pixel using the center
     if (success) {
       centerPixPos();//set the reference pixel for the next frame to the center of the object in this frame
+      chosenColor = frame.nonFiltered[pixPos];
     }
     return success;
   }

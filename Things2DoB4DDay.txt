@@ -1,0 +1,9 @@
+Things to do:
+Get line tracking working
+Get the visual display for HSB filtering working
+Ensure the program works on school computers
+Clean up code
+update flowchart
+update uml
+update readMe
+update plan

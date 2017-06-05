@@ -118,13 +118,13 @@ class Frame {
     float[] upperThresh = {h+delta1, s+delta2, b+delta3};
     for (int i = 0; i < getSize(); i++) {
       if (inRange(getColor(i), lowerThresh, upperThresh)) { //if the color is within the threshold range
-        filtered[i] = color(255); //set it to white
+        screen[i] = color(255); //set it to white
       } else {
-        filtered[i] = color(0); //set to black
+        screen[i] = color(0); //set to black
       }
     }
-    img.pixels = filtered;
-    screen = filtered;
+    img.pixels = screen;
+    //screen = filtered;
     img.filter(ERODE);
     img.filter(DILATE);
   }
@@ -212,43 +212,43 @@ class Frame {
     return Math.sqrt(Math.pow(gy, 2)+Math.pow(gx, 2));
   }
 
-  public void dilate() {
-    //target value is white because it is a binary image with white being the object
-    int targetValue = 255;
-    int reverseValue = 0; //reverse of white is black :)
+  //public void dilate() {
+  //  //target value is white because it is a binary image with white being the object
+  //  int targetValue = 255;
+  //  int reverseValue = 0; //reverse of white is black :)
 
-    for (int y = 0; y < img.height; y++) {
-      for (int x = 0; x < img.width; x++) {
-        //For BLACK pixel RGB all are set to 0 and for WHITE pixel all are set to 255.
-        int[] coords = {x, y};
-        if (red(getColor(coords)) == targetValue) {
-          /*
-        3x3 kernel
-           * [1, 1, 1
-           *  1, 1, 1
-           *  1, 1, 1]
-           */
-          boolean flag = false;   //this will be set if a pixel of reverse value is found in the mask
-          for (int ty = y - 1; ty <= y + 1 && flag == false; ty++) {
-            for (int tx = x - 1; tx <= x + 1 && flag == false; tx++) {
-              if (ty >= 0 && ty < img.height && tx >= 0 && tx < img.width) {
-                //origin of the mask is on the image pixels
-                if (red(getColor(tx+ty*img.width)) != targetValue) {
-                  flag = true;
-                  filtered[x+y*width] = reverseValue;
-                }
-              }
-            }
-          }
-          if (flag == false) {//if all of the pixels were the targetvalue
-            filtered[x+y*width] = color(targetValue);
-          }
-        } else {
-          filtered[x+y*width] = color(reverseValue);
-        }
-      }
-    }
-    img.pixels = filtered; //save filter to the screen
-  }
+  //  for (int y = 0; y < img.height; y++) {
+  //    for (int x = 0; x < img.width; x++) {
+  //      //For BLACK pixel RGB all are set to 0 and for WHITE pixel all are set to 255.
+  //      int[] coords = {x, y};
+  //      if (red(getColor(coords)) == targetValue) {
+  //        /*
+  //      3x3 kernel
+  //         * [1, 1, 1
+  //         *  1, 1, 1
+  //         *  1, 1, 1]
+  //         */
+  //        boolean flag = false;   //this will be set if a pixel of reverse value is found in the mask
+  //        for (int ty = y - 1; ty <= y + 1 && flag == false; ty++) {
+  //          for (int tx = x - 1; tx <= x + 1 && flag == false; tx++) {
+  //            if (ty >= 0 && ty < img.height && tx >= 0 && tx < img.width) {
+  //              //origin of the mask is on the image pixels
+  //              if (red(getColor(tx+ty*img.width)) != targetValue) {
+  //                flag = true;
+  //                filtered[x+y*width] = reverseValue;
+  //              }
+  //            }
+  //          }
+  //        }
+  //        if (flag == false) {//if all of the pixels were the targetvalue
+  //          filtered[x+y*width] = color(targetValue);
+  //        }
+  //      } else {
+  //        filtered[x+y*width] = color(reverseValue);
+  //      }
+  //    }
+  //  }
+  //  img.pixels = filtered; //save filter to the screen
+  //}
   //========================Major Methods========================
 }

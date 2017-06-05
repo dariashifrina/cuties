@@ -59,7 +59,7 @@ class TrackedObject {
         objectContained.add(i);
       }
     }
-    if (objectContained.size() == 0) {
+    if (objectContained.size() < frame.getSize()/(50000)) {
       return false;
     }
     return true;

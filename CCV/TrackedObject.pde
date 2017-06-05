@@ -1,6 +1,7 @@
 import java.util.*;
 class TrackedObject {
   Frame frame; 
+  Deque<Integer> trace; //trace
   ArrayList<Integer> objectContained; //collection of object edge pixels
   color chosenColor; //selected color of the pixel
   int pixPos; //position of pixel
@@ -15,6 +16,7 @@ class TrackedObject {
   TrackedObject(int xcor, int ycor, Frame frame)
   { 
     this.frame = frame;
+    trace = new LinkedList<Integer>();
     int[] coords = {xcor, ycor};
     pixPos = CCVMath.getXY(coords, frame.getWidth()); //save the target pixel's location in 1d not 2d
     chosenColor = frame.getColor1(pixPos); //access the color of the target pixel
@@ -37,6 +39,11 @@ class TrackedObject {
         int[] coords = CCVMath.getXY(i, frame.getWidth());
         set(coords[0], coords[1], red);
       }
+      //color green = color(0, 255, 0);
+      //for (int n : trace) {
+      //  int[] coords = CCVMath.getXY(n, frame.getWidth());
+      //  set(coords[0],coords[1],green);
+      //}
     }
   }
 
@@ -89,6 +96,7 @@ class TrackedObject {
       coords[0] = sumX/objectContained.size();
       coords[1] = sumY/objectContained.size();
       pixPos = CCVMath.getXY(coords, frame.getWidth());
+      trace.add(pixPos);
     }
   }
 

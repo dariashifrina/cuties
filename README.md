@@ -57,10 +57,10 @@ You may also change what you see on the screen using the filters. The mirror fil
 The binary HSB filter takes a color(the color of the object), then breaks the color down into its individual components: hue, saturation, and brighness. The filter then creates a range of acceptable values for each component using a lower and upper threshold with adjustable deltas. The frame is then iterated through, and each pixel is decomposed into its HSB components and checked to see if each element makes it its corresponding acceptable range. If it meets the criteria, this means that the pixel is similar enough to the object pixel that it is most likely part of the object, and it is turned white(255). If it does not meet the criteria, it is turned black. This creates a binary image(black and white) in which the white pixels are the object pixels and the black are not. Lastly, because the filter is not perfect, it will pick up random pixels here and there which is considered noise. To get rid of such noise, an erosion and a dilation are called one after the other. Though they are inverse operations, it doesn't function that way when the only two options for a color are white or black. And because black is the majority, the white noise will be filtered out, leaving just the object.
 
 Before:
-![alt text](https://gyazo.com/4b46ec8f910aae40916de1e123b3bbc7)
+![alt text](https://i.gyazo.com/4b46ec8f910aae40916de1e123b3bbc7.png)
 
 After:
-![alt text](https://gyazo.com/f48c296130fb8d21786bd9a0a32bad06)
+![alt text](https://i.gyazo.com/f48c296130fb8d21786bd9a0a32bad06.png)
 
 **Why use HSB as opposed to RGB?**
 HSB transforms the RGB cartesian cube into a more intuitive system in the form of a cylinder. This allows easier adjustment of threshold because if you trying to calibrate on RGB, you are adjusting the color itself which can lead to very extreme consequences. When using HSB, you can adjust the saturation if your object seems to be more vibrant than other things in the frame, the brightness if it is brighter or darker, and hue if the acceptable color range doesn't seem right. A diagram of HSB and RGB can be seen below.

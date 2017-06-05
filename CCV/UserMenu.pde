@@ -5,6 +5,7 @@ class UserMenu {
   float buttonWidth;
   float buttonHeight;
   color buttonColor;
+  PImage img;
 
   UserMenu(float screenWidth, float screenHeight) {
     xCenter = screenWidth/2;
@@ -13,9 +14,11 @@ class UserMenu {
     buttonOffset = 150;
     buttonHeight = 150;
     buttonColor = color(153, 204, 255);
+    img = loadImage("background.jpg");
   }
 
   void draw() {
+    background(img);
     fill(buttonColor);
     ellipse(xCenter+buttonOffset, yCenter, buttonWidth, buttonHeight);
     ellipse(xCenter-buttonOffset, yCenter, buttonWidth, buttonHeight);

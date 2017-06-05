@@ -33,25 +33,39 @@ wow we so BOSS bc...
 -Handled multithreading in file selection
 -Got a video file feed working
 -Got mirroring to work
+-Fixed the program constantly crashing due to resizing errors
+-got object tracking working after many failed methods
+- Got multiview frame filtering working in a cohesive manner
+
 UNRESOLVED ISSUES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 File selection is not restricted to video file formats!
-Naive approach that would be used as intermediary to MVP is way too naive and doesn't function at all due to causing a StackOverFlow error from recursive calls. Better edge detection must therefore be deployed.
+There is no restriction on picking "Camera" if you don't have a camera
+The matrix traversal is very slow because we kept getting stack overflow errors if we tried to use any form of recursion on the screen.
+Resizing may fail on computers due to how GStreamer initializes the video feed
+The sobel filter is VERY slow and unoptimized
+
 COOL STUFF LEARNED
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-How to work with multithreading
-
-
+The advantages and disadvantages of color systems
+How kernel based filtering works
+Matrix approximated derivatives
+How gaussian blur filters, erosion, dilation, and sobel filters work
 
 MID-DEVELOPMENT DESIGN CHANGES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 - realized Camera has a 2D array attribute instead of a 3D array. Pixels aren't divided into two arrays of rows and cols but instead, a 1D array holds all of the pixels.
 - Abstracted video feed to an interface implemented by video file and web cam.
+- Switched to use edge tracking
+- Scratch that^ it failed...Swapped to a binary double threshold filter for HSB color
 
 LESSONS LEARNED
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 tales of wisdom gained...
-
+Driver operator is sooooooo useful when you are working on complex problems
+The recursion stack limit is far too small to use for outwards expansion traversal in a large matrix
+Don't hard code too many things, because you may have to restructure and it will be painful to do...
+Don't become too focused on one problem when you have many other things to worry about that have a higher priority.
 
  ______   ______   __   __   __       ______   _______     
 /_____/\ /_____/\ /_/\ /_/\ /_/\     /_____/\ /______/\    
@@ -120,5 +134,11 @@ James: Completed a custom sobel edge detection filter. Turned out to be too inco
 2017-06-04
 --------------------------------------------------------------
 James: Since sobel edge detection wasnt reliable, I wrote a double threshold HSB filter. Debugged the program, added buttons, cleaned up code.
+Dasha: Worked on flowcharts and UML for the final product
+==============================================================
+
+2017-06-05
+--------------------------------------------------------------
+James: Writing the README to look nice and to explain everything comprehensively. 
 ==============================================================
 ==================================================

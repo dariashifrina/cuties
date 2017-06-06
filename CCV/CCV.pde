@@ -14,6 +14,7 @@ boolean resized; //true if already resized
 boolean mirrored;//true if the user wants the display to be mirrored
 boolean sobelFiltered; //true if the user wants to see the sobel Filter on the screen
 boolean hsbFiltered; //true if the user wants to see the hsb filter on the screen
+boolean loading;
 
 void setup() {
   size(600, 480);//adjusts the camera resolution
@@ -28,6 +29,7 @@ void setup() {
   mirrored = false;
   sobelFiltered = false;
   hsbFiltered = false;
+  loading = false;
 }
 
 /**
@@ -84,6 +86,7 @@ void mouseReleased() {//ensures that it only happens once vs mouse clicked
   if (state == 0) { //if you are in the user menu
     int toBeState; //Handles threading in the case of state 2 so the draw method doesn't get ahead of the mouseClicked()
     toBeState = menu.mouseReleased(); //calls mouseClicked of menu to check if the mouse is in the buttons
+    loading = true;
     if (toBeState == 1) {
       in = new Camera(this);
       state = toBeState;
@@ -91,7 +94,9 @@ void mouseReleased() {//ensures that it only happens once vs mouse clicked
     if (toBeState == 2) {
       selectInput("Select a video file to run", "fileSelected"); //opens OS's filesystem to get File object. "fileSelected" is method callback
     }
-  } else {
+  }
+  //our done loading check is see if pixles exist:
+  else {
     tracked = new TrackedObject(mouseX, mouseY, currentFrame);
   }
 }
@@ -154,7 +159,7 @@ void keyPressed() {
   if (keyCode == DOWN) {
     hsbFiltered = !hsbFiltered;
   }
-  if(keyCode == BACKSPACE){
+  if (keyCode == BACKSPACE) {
     tracked = null;
   }
 }

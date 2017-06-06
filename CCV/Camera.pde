@@ -1,5 +1,6 @@
 class Camera implements VideoStream {
   Capture cam;
+  int counter = 0;
   
   Camera(PApplet app) {
     String[] cameras = Capture.list();
@@ -20,9 +21,10 @@ class Camera implements VideoStream {
     if (cam.available()) {
       cam.read();
     }
-    else {
+    else{
       //println("no frame");
-      return createImage(2000,2000,0);
+      counter++;
+      return createImage(1280,720,0);
     }
     return (PImage) cam;
   }

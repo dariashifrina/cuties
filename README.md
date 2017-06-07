@@ -1,5 +1,5 @@
 # Cuties Computer Vision
-## James Smith, Daria Shifrina, Gilvir Gill
+## by James Smith, Daria Shifrina, Gilvir Gill
 Cuties Computer Vision (**CCV**) is a basic implementation of [Computer Vision](https://en.wikipedia.org/wiki/Computer_vision), the idea of using a computer to interpret visual data. This program allows you to track an object or run a sobel edge detection filter on a pre-recorded video or a live camera feed. This program relies on keeping track of a single object via it's color using its hue, saturation, and brightness components(HSB).
 
 # Prerequisites

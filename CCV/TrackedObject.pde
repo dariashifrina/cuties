@@ -17,7 +17,7 @@ class TrackedObject {
   TrackedObject(int xcor, int ycor, Frame frame)
   { 
     this.frame = frame;
-    //trace = new LinkedList<Integer>();
+    trace = new Tracer();
     int[] coords = {xcor, ycor};
     pixPos = CCVMath.getXY(coords, frame.getWidth()); //save the target pixel's location in 1d not 2d
     chosenColor = frame.getColor1(pixPos); //access the color of the target pixel
@@ -32,6 +32,7 @@ class TrackedObject {
   //   */
   void draw(Frame frm)
   {
+    trace.draw();
     objectContained = new ArrayList(100);
     if (update(frm)) {//if it was successful in updating the object with the new frame, then display it
       //assembles the arraylist containing the desired indices:
@@ -97,7 +98,7 @@ class TrackedObject {
       coords[0] = sumX/objectContained.size();
       coords[1] = sumY/objectContained.size();
       pixPos = CCVMath.getXY(coords, frame.getWidth());
-      //trace.add(pixPos);
+      trace.addPoint(pixPos);
     }
   }
 

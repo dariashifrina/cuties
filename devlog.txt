@@ -122,7 +122,7 @@ James: Revised flowchart and UML diagrams.
 
 2017-06-01
 --------------------------------------------------------------
-In class: changed approach to tracking edges instead of using color. We're going to use color to find an object's pixel, then use edge filtering to navigate the edges of the object.
+James, Gilvir, Dasha: changed approach to tracking edges instead of using color. We're going to use color to find an object's pixel, then use edge filtering to navigate the edges of the object.
 James: Created the outward traversal algorithm, continued working on the TrackedObject class, cleaned up code, and put the repo in compliance with the homeworks(I didn't realize that we had to make new files for the plan)
 ==============================================================
 
@@ -134,11 +134,17 @@ James: Completed a custom sobel edge detection filter. Turned out to be too inco
 2017-06-04
 --------------------------------------------------------------
 James: Since sobel edge detection wasnt reliable, I wrote a double threshold HSB filter. Debugged the program, added buttons, cleaned up code.
-Dasha: Worked on flowcharts and UML for the final product
+Dasha: Worked on flowcharts and UML for the final product.
 ==============================================================
 
 2017-06-05
 --------------------------------------------------------------
 James: Writing the README to look nice and to explain everything comprehensively. 
+Dasha: updated usermenu.
+==============================================================
+
+2017-06-06
+--------------------------------------------------------------
+James, Gilvir, Dasha: fixed resizing issue.
 ==============================================================
 ==================================================

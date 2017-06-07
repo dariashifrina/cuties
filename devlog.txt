@@ -36,10 +36,11 @@ wow we so BOSS bc...
 -Fixed the program constantly crashing due to resizing errors(set the window to have a default and a image dimension resize if available)
 -got object tracking working after many failed methods(Thought of using HSB as opposed to color distance(RGB) or edge detection because of their undesirable results)
 - Got multiview frame filtering working in a cohesive manner(handled filtering frames by using 3 color arrays to represent one frame, one that is unedited, one that is for the tracked object, and one for intermediate filtering steps)
+- Got object tracing to show path of tracked object to work.
+- Got file validation working for selecting video source.
 
 UNRESOLVED ISSUES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-File selection is not restricted to video file formats!
 There is no restriction on picking "Camera" if you don't have a camera
 The matrix traversal is very slow because we kept getting stack overflow errors if we tried to use any form of recursion on the screen.
 Resizing may fail on computers due to how GStreamer initializes the video feed
@@ -156,5 +157,6 @@ Dasha: updated usermenu.
 --------------------------------------------------------------
 James, Gilvir, Dasha: fixed resizing issue.
 James: Finished up README and updated devlog
+James and Dasha: worked on tracer class.
 ==============================================================
 ==================================================

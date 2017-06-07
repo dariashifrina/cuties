@@ -100,7 +100,7 @@ void mouseReleased() {//ensures that it only happens once vs mouse clicked
     }
   }
   //our done loading check is see if pixles exist:
-  else {
+  else if (img != null) {
     tracked = new TrackedObject(mouseX, mouseY, currentFrame);
   }
 }

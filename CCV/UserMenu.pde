@@ -13,12 +13,12 @@ class UserMenu {
     buttonWidth = 200;
     buttonOffset = 150;
     buttonHeight = 150;
-    buttonColor = color(153, 204, 255);
-    //img = loadImage("background.jpg");
+    buttonColor = color(247, 100, 255);
+    img = loadImage("background.jpg");
   }
 
   void draw() {
-    //background(img);
+    background(img);
     fill(buttonColor);
     ellipse(xCenter+buttonOffset, yCenter, buttonWidth, buttonHeight);
     ellipse(xCenter-buttonOffset, yCenter, buttonWidth, buttonHeight);
@@ -27,7 +27,7 @@ class UserMenu {
     textSize(32);
     text("Camera", 2*xCenter-(xCenter+buttonOffset), yCenter);
     text("Video File", xCenter+buttonOffset, yCenter);
-    fill(153, 204, 255);
+    fill(87, 9, 87);
     textAlign(CENTER, TOP);
     text("Welcome to Cuties Computer Vision!", xCenter, 0);
     textSize(24);

@@ -8,6 +8,8 @@ Cuties Computer Vision (**CCV**) is a basic implementation of [Computer Vision](
  b. Your computer must have GStreamer0.10 installed along side the necessary v4l2 (Video4Linux2) plugins such as v4l2src
 3. You must have an understanding of hue, saturation, and brightness in order to calibrate the program. Information can be found further down and also [here](https://en.wikipedia.org/wiki/HSL_and_HSV)
 
+**Note**: If you are running OSX, you must use JDK8 or follow [this tutorial](http://blog.byjean.eu/java/2013/08/22/making-jdk7-nio-filetypedetection-work-on-mac-osx.html) in order to use video files! Camera works perfectly fine though.
+
 ## Easily installing the Video library
 
 First, locate this menu item in Processing, and click on it:

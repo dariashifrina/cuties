@@ -126,7 +126,7 @@ void fileSelected(File selection) {
 //returns true if the user has a valid video file selected and exits otherwise
 boolean invalid(File selection) {
   try {
-    return Files.probeContentType(selection.toPath()).substring(0, 6).equals("video");//get the MIME content type and slice the first 5 letters because if it is a video it will be "video"
+    return !Files.probeContentType(selection.toPath()).substring(0, 5).equals("video");//get the MIME content type and slice the first 5 letters because if it is a video it will be "video"
   } 
   catch(Exception e) {
     print("User did not select a valid video file...exiting");

@@ -1,6 +1,4 @@
 Things to do:
 Get line tracking working
-filter outlier object pixels
 update flowchart
 update uml
-update readMe

@@ -88,20 +88,24 @@ void draw() {
  *Creates a trackedObject at the mouse's position
  */
 void mouseReleased() {//ensures that it only happens once vs mouse clicked
-  if (state == 0) { //if you are in the user menu
-    int toBeState; //Handles threading in the case of state 2 so the draw method doesn't get ahead of the mouseClicked()
-    toBeState = menu.mouseReleased(); //calls mouseClicked of menu to check if the mouse is in the buttons
-    if (toBeState == 1) {
-      in = new Camera(this);
-      state = toBeState;
+  try {
+    if (state == 0) { //if you are in the user menu
+      int toBeState; //Handles threading in the case of state 2 so the draw method doesn't get ahead of the mouseClicked()
+      toBeState = menu.mouseReleased(); //calls mouseClicked of menu to check if the mouse is in the buttons
+      if (toBeState == 1) {
+        in = new Camera(this);
+        state = toBeState;
+      }
+      if (toBeState == 2) {
+        selectInput("Select a video file to run", "fileSelected"); //opens OS's filesystem to get File object. "fileSelected" is method callback
+      }
     }
-    if (toBeState == 2) {
-      selectInput("Select a video file to run", "fileSelected"); //opens OS's filesystem to get File object. "fileSelected" is method callback
+    //our done loading check is see if pixles exist:
+    else if (img != null) {
+      tracked = new TrackedObject(mouseX, mouseY, currentFrame);
     }
-  }
-  //our done loading check is see if pixles exist:
-  else if (img != null) {
-    tracked = new TrackedObject(mouseX, mouseY, currentFrame);
+  } 
+  catch(Exception e) {
   }
 }
 

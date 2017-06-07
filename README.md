@@ -69,5 +69,13 @@ HSB transforms the RGB cartesian cube into a more intuitive system in the form o
 Additionally, a double threshold cannot be implemented in RGB because you can only calculate color distance using the 3D cartesian cube, thus leading to a less accurate filter.
 
 **Sobel Edge Detection Filter**:
+The sobel edge detection filter produces an image emphasising edges. It utilizes 2 3x3 kernels(can be seen below), that act as a discrete differentiation operator to compute an approximation of the gradient of the image intensity function. First the image needs to be preprocessed using a Gaussian blur method to get rid of discrepancies in non edges, and it is turned into a grayscale image for the sake of simple grandients. Each pixel on the screen and its 8 local neighboring pixels are represented in a 3x3 matrix and the 3x3 kernels are convolved with this pixel matrix to calculate an approximation of the derivatives - one for horizontal changes in gradient, and one for vertical change in gradient. Additionally, each pixel can be represented as a vector that represents the magnitude of the gradient at that point, thus the vector's magnitude can be used to differentiate edges in the photo. Given a threshold, a binary image can be produced in which if a pixel's gradient vector is greater than a certain gradient magnitude threshold, it is turned white, and if not, it is turned black. This filtering method is relatively inexpensive as far as computation goes for edge detection methods due to its use of local gradient approximation and only basic arithmetic, which makes it optimal for a live video stream setting, where many frames must be processed per second. The downside of this filter is that it produces somewhat crude images that may not always detect every edge, especially for images with high frequency variation. For this reason, we found that we couldn't find a reliable way to implement it into tracking, however, we believe that it is still an interesting feature that has real world applications in computer vision, so we left it in the final product.
+![alt text](https://wikimedia.org/api/rest_v1/media/math/render/svg/848abd56e0e33cf402f01183bfe1f68a93fb34a9)
+
+Before:
+![alt text](https://gyazo.com/1dbf7a3789f01dfa8a677e6963a80ccc)
+
+After:
+![alt text](https://i.gyazo.com/e95b0d35bd25754eb49e17873b9c77a5.png)
 
 # What we would have done if given more time

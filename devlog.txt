@@ -5,6 +5,7 @@ Dasha Shifrina
 pd 03
 ---------------------
 Cuties Computer Vision
+NOTE: SEE README FOR OTHER DETAILS ON THE PROJECT!
 ────────▄▄▄▄▄▄▄▄▄▄▄▄▄───────────
 ───██──██▀▀▀▀▀▀▀▀▀▀▀▀█──────────
 ─▄████▄██───▄▄▄▄▄▄───█▄▄▄▄▄▄▄▄▄─

@@ -46,6 +46,7 @@ The matrix traversal is very slow because we kept getting stack overflow errors 
 Resizing may fail on computers due to how GStreamer initializes the video feed
 The sobel filter is slow
 There is still a considerable amount of noise(tracked pixels that shouldnt) even after filtering
+Getting the Mime type in JDK 7 for OSX is bugged, so importing a video file does not work. 
 
 COOL STUFF LEARNED
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

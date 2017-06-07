@@ -27,7 +27,7 @@ class UserMenu {
     textSize(32);
     text("Camera", 2*xCenter-(xCenter+buttonOffset), yCenter);
     text("Video File", xCenter+buttonOffset, yCenter);
-    fill(87, 9, 87);
+    fill(255);
     textAlign(CENTER, TOP);
     text("Welcome to Cuties Computer Vision!", xCenter, 0);
     textSize(24);

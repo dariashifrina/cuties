@@ -1,4 +1,0 @@
-Things to do:
-Get line tracking working
-update flowchart
-update uml

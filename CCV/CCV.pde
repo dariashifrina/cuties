@@ -58,6 +58,9 @@ void draw() {
       } 
       if (mirrored) {
         currentFrame.mirror(); //mirror the picture
+        if(tracked != null){
+          tracked.trace.mirror();
+        }
       }
       if (sobelFiltered) {
         currentFrame.sobelFilter(sobel_threshold);

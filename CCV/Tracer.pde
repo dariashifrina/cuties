@@ -67,4 +67,17 @@ class Tracer {
     }
     trace.addFirst(pixPos);
   }
+  
+  //in the case that the screen gets mirrored, so do the previous points
+  void mirror(){
+    int[] unpacked = new int[trace.size()];
+    for(int i = 0; i < trace.size(); i++){
+      int[] temp = CCVMath.getXY(trace.removeFirst(), img.width); //get the xy coordinates
+      temp[0] = img.width-temp[0];//mirror the x
+      unpacked[i] = CCVMath.getXY(temp, img.width);//stick the coordinates into this temp array in linear coordinates
+    }
+    for(int i:unpacked){
+      trace.addLast(i);//readd everything back, but mirrored
+    }
+  }   
 }

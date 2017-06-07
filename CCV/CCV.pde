@@ -2,6 +2,8 @@
  * Dasha, James, Gilivr
  * APCS2 Pd3
  */
+import java.nio.file.Files;
+
 Frame currentFrame;
 VideoStream in;
 PImage img;
@@ -106,11 +108,24 @@ void mouseReleased() {//ensures that it only happens once vs mouse clicked
  *@return void
  */
 void fileSelected(File selection) {
-  if (selection == null) {
-    println("Window was closed or the user hit cancel.");
-  } else { 
+  if (selection == null || invalid(selection)) {
+    println("Window was closed, the user hit cancel, or did not select a valid video file...exiting");
+    exit();
+  } else {
     in = new Video(this, selection.getAbsolutePath()); //turns the file object into a String path and passes it into a Video file feed object
     state = 2;  //finally sets the state since you are at the end of multithreading
+  }
+}
+
+//returns true if the user has a valid video file selected and exits otherwise
+boolean invalid(File selection) {
+  try {
+    return Files.probeContentType(selection.toPath()).substring(0, 6).equals("video");//get the MIME content type and slice the first 5 letters because if it is a video it will be "video"
+  } 
+  catch(Exception e) {
+    print("User did not select a valid video file...exiting");
+    exit();
+    return false;//maintain boolean return value to make java happy
   }
 }
 

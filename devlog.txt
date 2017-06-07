@@ -41,10 +41,10 @@ wow we so BOSS bc...
 
 UNRESOLVED ISSUES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-There is no restriction on picking "Camera" if you don't have a camera
+The program crashes when picking "Camera" when you don't have a camera, but possibly a piece of software that makes your computer think that you have a camera because it tries to open up a feed with it and GStreamer fails. This probably isn't applicable to most people.
 The matrix traversal is very slow because we kept getting stack overflow errors if we tried to use any form of recursion on the screen.
 Resizing may fail on computers due to how GStreamer initializes the video feed
-The sobel filter is VERY slow
+The sobel filter is slow
 There is still a considerable amount of noise(tracked pixels that shouldnt) even after filtering
 
 COOL STUFF LEARNED

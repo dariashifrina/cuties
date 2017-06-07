@@ -5,7 +5,19 @@ Cuties Computer Vision (**CCV**) is a basic implementation of [Computer Vision](
 # Prerequisites
 1. The Video library by the Processing Foundation must be installed in order to run this program. Information on how to install the library can be found [here](https://github.com/processing/processing/wiki/How-to-Install-a-Contributed-Library) and the actual library repository can be found [here if you wish to manually install it.](https://github.com/processing/processing-video)
 2. In order to use the webcam feature, you must have a webcam, otherwise the program will fail. In order to run a video file, it must be of a video file format supported by GStreamer([valid file types](https://github.com/processing/processing-video/wiki)) otherwise, the program will exit
+ b. Your computer must have GStreamer0.10 installed along side the necessary v4l2 (Video4Linux2) plugins such as v4l2src
 3. You must have an understanding of hue, saturation, and brightness in order to calibrate the program. Information can be found further down and also [here](https://en.wikipedia.org/wiki/HSL_and_HSV)
+
+## Easily installing the Video library
+
+First, locate this menu item in Processing, and click on it:
+
+![imgur offline?](http://i.imgur.com/O30PkX1.png)
+
+Next, simply search for Video, and install it. Make sure you are installing the one that explicitly mentions GStreamer and is made by the Processing foundation:
+
+![imgur offline?](http://i.imgur.com/4Gabe0F.png)
+
 
 # How to Run
 After you have met the first prerequistite, navigate to the 'cuties' repository folder on your computer and enter `processing CCV/CCV.pde` into the terminal. Alternitively, you could also find CCV.pde in a file explorer and run that file. After opening the file in processing, run the applet by clicking the play button in the top left corner of the screen.

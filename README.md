@@ -33,6 +33,7 @@ Here are the keys necessary to use with the program:
 | BACKSPACE | Stops tracking the object on the screen |
 | UP | Mirror the screen |
 | LEFT | Turn on sobel edge detection filter |
+| RIGHT | Turns on object motion tracing |
 | DOWN | Turn on HSB range filter |
 | Q | Increases the hue threshold  |
 | A | Decreases the hue threshold  |
@@ -61,6 +62,8 @@ Note: All messages are output through the processing terminal. These include err
 **Video**: Performs the same operation as Camera, but instead opens up a video file and loops it.
 
 **Frame**: A container for the PImage frame. Contains 3 color arrays, one for what the computer sees, one for mid process filtering, and one for what the user sees. This class is used for getting information from a video frame, changing information on the video frame, filtering the video frame, and displaying the frame.
+
+**Tracer**: A container for the midpoints of the objects tracked in the previous 20 frames. Uses a Deque to maintain order and quick removal and addition times. Traces motion by drawing lines connecting the midpoints in chronological order.
 
 **Tracked Object**: Represents the object being tracked on the screen. At its core, it relies on its color, its frame, and its ArrayList containing object pixels. This class takes in a frame, runs a binary HSB filter on the frame for its color and threshold values, and then adds the pixels that meet the requirement of the filter to the arrayList for display.
 

@@ -16,7 +16,7 @@ boolean resized; //true if already resized
 boolean mirrored;//true if the user wants the display to be mirrored
 boolean sobelFiltered; //true if the user wants to see the sobel Filter on the screen
 boolean hsbFiltered; //true if the user wants to see the hsb filter on the screen
-boolean loading;
+boolean tracing;//displays a trace of the object if true
 
 void setup() {
   size(600, 480);//adjusts the camera resolution
@@ -31,7 +31,7 @@ void setup() {
   mirrored = false;
   sobelFiltered = false;
   hsbFiltered = false;
-  loading = false;
+  tracing = false;
 }
 
 /**
@@ -72,6 +72,9 @@ void draw() {
         currentFrame.draw(displayed);
         if (tracked != null) { //if there is a trackedObject, display it
           tracked.draw(currentFrame);//update the object with the new frame and draw it
+          if (tracing) {
+            tracked.trace.draw();
+          }
         }
       }
     }
@@ -88,7 +91,6 @@ void mouseReleased() {//ensures that it only happens once vs mouse clicked
   if (state == 0) { //if you are in the user menu
     int toBeState; //Handles threading in the case of state 2 so the draw method doesn't get ahead of the mouseClicked()
     toBeState = menu.mouseReleased(); //calls mouseClicked of menu to check if the mouse is in the buttons
-    loading = true;
     if (toBeState == 1) {
       in = new Camera(this);
       state = toBeState;
@@ -169,12 +171,23 @@ void keyPressed() {
     mirrored = !mirrored;
   }
   if (keyCode == LEFT) {
-    sobelFiltered = !sobelFiltered;
+    if (hsbFiltered) {
+      println("Can't filter through HSB and sobel at the same time. Please turn off HSB before you turn on sobel");
+    } else {
+      sobelFiltered = !sobelFiltered;
+    }
   }
   if (keyCode == DOWN) {
-    hsbFiltered = !hsbFiltered;
+    if (sobelFiltered) {
+      println("Can't filter through HSB and sobel at the same time. Please turn off sobel before you turn on HSB");
+    } else {
+      hsbFiltered = !hsbFiltered;
+    }
   }
   if (keyCode == BACKSPACE) {
     tracked = null;
+  }
+  if (keyCode == RIGHT) {
+    tracing = !tracing;
   }
 }

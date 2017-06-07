@@ -8,21 +8,29 @@
 class Tracer {
   //int stroke;
   Deque<Integer> trace;  
+  int maxPoints;
+  
   //constructor. initializes deque that holds center points of tracked object through past 100 frames.
   Tracer() {
     trace = new LinkedList<Integer>();
-    //stroke = 1;
+    maxPoints = 20;
   }
   //if there are more than 2 points present in 
   void draw() {
-    if (trace.size() > 3) {
+    if (trace.size() > 1) {
       Iterator<Integer> itr = trace.iterator();
-      while (itr.hasNext()) {     
-        strokeWeight(30);
-        // int first = itr.next();
-        line(CCVMath.getXY(trace.getFirst(), img.width)[0], CCVMath.getXY(trace.getFirst(), img.width)[1], CCVMath.getXY(itr.next(), img.width)[0], CCVMath.getXY(itr.next(), img.width)[1]);
-        itr.remove();
+      int[] dummy = null;
+      int[] coords = null;
+      while (itr.hasNext()) {    
+        strokeWeight(10);
         stroke(255, 247, 0);
+        if (dummy == null) {
+          dummy = CCVMath.getXY(itr.next(), img.width);
+        } else {
+          coords = CCVMath.getXY(itr.next(), img.width);
+          line(dummy[0], dummy[1], coords[0], coords[1]);
+          dummy = coords;
+        }
       }
     }
   }
@@ -54,6 +62,9 @@ class Tracer {
   }
   //allows for adding center points from tracked object class
   void addPoint(int pixPos) {
-    trace.add(pixPos);
+    if (trace.size() > maxPoints) {
+      trace.removeLast();
+    }
+    trace.addFirst(pixPos);
   }
 }

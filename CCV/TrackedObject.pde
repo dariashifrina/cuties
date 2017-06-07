@@ -2,7 +2,6 @@ import java.util.*;
 class TrackedObject {
   Frame frame; 
   Tracer trace;
-//  Deque<Integer> trace; //trace
   ArrayList<Integer> objectContained; //collection of object edge pixels
   color chosenColor; //selected color of the pixel
   int pixPos; //position of pixel
@@ -32,7 +31,6 @@ class TrackedObject {
   //   */
   void draw(Frame frm)
   {
-    trace.draw();
     objectContained = new ArrayList(100);
     if (update(frm)) {//if it was successful in updating the object with the new frame, then display it
       //assembles the arraylist containing the desired indices:
@@ -41,11 +39,6 @@ class TrackedObject {
         int[] coords = CCVMath.getXY(i, frame.getWidth());
         set(coords[0], coords[1], red);
       }
-      //color green = color(0, 255, 0);
-      //for (int n : trace) {
-      //  int[] coords = CCVMath.getXY(n, frame.getWidth());
-      //  set(coords[0],coords[1],green);
-      //}
     }
   }
 

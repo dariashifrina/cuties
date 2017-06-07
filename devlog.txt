@@ -52,6 +52,7 @@ The advantages and disadvantages of color systems
 How kernel based filtering works
 Matrix approximated derivatives
 How gaussian blur filters, erosion, dilation, and sobel filters work and their runtimes
+What MIME types are(used for video file validation)
 
 MID-DEVELOPMENT DESIGN CHANGES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

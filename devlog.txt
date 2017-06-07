@@ -126,6 +126,12 @@ James, Gilvir, Dasha: changed approach to tracking edges instead of using color.
 James: Created the outward traversal algorithm, continued working on the TrackedObject class, cleaned up code, and put the repo in compliance with the homeworks(I didn't realize that we had to make new files for the plan)
 ==============================================================
 
+2017-06-02
+--------------------------------------------------------------
+James: continued coding the traversal and cleaned up code.
+Dasha: added slider to adjust threshold. 
+==============================================================
+
 2017-06-03
 --------------------------------------------------------------
 James: Completed a custom sobel edge detection filter. Turned out to be too inconsistent to be used in tracking, but we are going to keep it as a feature in the program and to possibly use in motion detection if we get to it!

@@ -115,7 +115,7 @@ void mouseReleased() {//ensures that it only happens once vs mouse clicked
  */
 void fileSelected(File selection) {
   if (selection == null || invalid(selection)) {
-    println("Window was closed, the user hit cancel, or did not select a valid video file...exiting");
+    println("Window was closed, the user hit cancel, did not select a valid video file, or OSX is being used on JDK7...exiting");
     exit();
   } else {
     in = new Video(this, selection.getAbsolutePath()); //turns the file object into a String path and passes it into a Video file feed object

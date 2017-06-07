@@ -78,4 +78,11 @@ Before:
 After:
 ![alt text](https://i.gyazo.com/e95b0d35bd25754eb49e17873b9c77a5.png)
 
-# What we would have done if given more time
+# What we would have done if given more time(What we will do)
+1. Optimized every expensive traversal/filter algorithm
+2. Multiple object tracking
+3. Motion tracking 
+4. Using trees to compare object shape
+5. Improved edge detection to be used in tracking process(color edge detection instead of greyscale, use gradient vector direction, ect.)
+6. Optical Character Recognition(OCR) (Sorry Mr. Brown, we really wanted to do it, but we vastly overestimated our available time for the project)
+7. On screen interaction using objects(similar to kinect)

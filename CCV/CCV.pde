@@ -58,9 +58,6 @@ void draw() {
       } 
       if (mirrored) {
         currentFrame.mirror(); //mirror the picture
-        if(tracked != null){
-          tracked.trace.mirror();
-        }
       }
       if (sobelFiltered) {
         currentFrame.sobelFilter(sobel_threshold);
@@ -172,6 +169,7 @@ void keyPressed() {
   }
   if (keyCode == UP) {
     mirrored = !mirrored;
+    if (tracked != null) tracked.trace.mirror();
   }
   if (keyCode == LEFT) {
     if (hsbFiltered) {

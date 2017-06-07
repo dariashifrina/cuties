@@ -34,32 +34,6 @@ class Tracer {
       }
     }
   }
-  //xcor of first tracked object center point in trace
-  int xcorFirst() {
-    return CCVMath.getXY(trace.getFirst(), img.width)[0];
-  }
-  //ycor of first tracked object center point in trace
-
-  int ycorFirst() {
-    return CCVMath.getXY(trace.getFirst(), img.width)[1];
-  }
-  //xcor of second tracked object center point in trace
-
-  int xcorSecond() {
-    int placeHolder = trace.removeFirst();
-    int secondPos = trace.getFirst();
-    trace.offerFirst(placeHolder);
-    return CCVMath.getXY(secondPos, img.width)[0];
-  }
-
-  //ycor of second tracked object center point in trace
-
-  int ycorSecond() {
-    int placeHolder = trace.removeFirst();
-    int secondPos = trace.getFirst();
-    trace.offerFirst(placeHolder);
-    return CCVMath.getXY(secondPos, img.width)[1];
-  }
   //allows for adding center points from tracked object class
   void addPoint(int pixPos) {
     if (trace.size() > maxPoints) {
@@ -70,14 +44,12 @@ class Tracer {
   
   //in the case that the screen gets mirrored, so do the previous points
   void mirror(){
-    int[] unpacked = new int[trace.size()];
-    for(int i = 0; i < trace.size(); i++){
+    int n = trace.size();
+    //for every number, we want to take it from one end (ie the back) then bring it back in the other, except modified
+    for(int i = 0; i < n; i++){
       int[] temp = CCVMath.getXY(trace.removeFirst(), img.width); //get the xy coordinates
       temp[0] = img.width-temp[0];//mirror the x
-      unpacked[i] = CCVMath.getXY(temp, img.width);//stick the coordinates into this temp array in linear coordinates
-    }
-    for(int i:unpacked){
-      trace.addLast(i);//readd everything back, but mirrored
-    }
+      trace.addLast( CCVMath.getXY(temp, img.width)) ;//stick the coordinates back from the other side.
+  }
   }   
 }

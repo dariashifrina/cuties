@@ -73,7 +73,7 @@ The sobel edge detection filter produces an image emphasising edges. It utilizes
 ![alt text](https://wikimedia.org/api/rest_v1/media/math/render/svg/848abd56e0e33cf402f01183bfe1f68a93fb34a9)
 
 Before:
-![alt text](https://gyazo.com/1dbf7a3789f01dfa8a677e6963a80ccc)
+![alt text](https://i.gyazo.com/1dbf7a3789f01dfa8a677e6963a80ccc.jpg)
 
 After:
 ![alt text](https://i.gyazo.com/e95b0d35bd25754eb49e17873b9c77a5.png)

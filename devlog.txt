@@ -29,13 +29,12 @@ Cuties Computer Vision
 OBSTACLES OVERCOME
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 wow we so BOSS bc...
--Got a camera feed working!
--Handled multithreading in file selection
--Got a video file feed working
--Got mirroring to work
--Fixed the program constantly crashing due to resizing errors
--got object tracking working after many failed methods
-- Got multiview frame filtering working in a cohesive manner
+-Got a camera feed working!(Figured out how the Video library worked, even with its lack of good documentation)
+-Handled multithreading in file selection(set a state variable that would wait in the menu until the stream was running)
+-Got mirroring to work(Swapped pixels to their opposite positions horizontally assuming the y axis divides the screen in the middle)
+-Fixed the program constantly crashing due to resizing errors(set the window to have a default and a image dimension resize if available)
+-got object tracking working after many failed methods(Thought of using HSB as opposed to color distance(RGB) or edge detection because of their undesirable results)
+- Got multiview frame filtering working in a cohesive manner(handled filtering frames by using 3 color arrays to represent one frame, one that is unedited, one that is for the tracked object, and one for intermediate filtering steps)
 
 UNRESOLVED ISSUES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -43,21 +42,22 @@ File selection is not restricted to video file formats!
 There is no restriction on picking "Camera" if you don't have a camera
 The matrix traversal is very slow because we kept getting stack overflow errors if we tried to use any form of recursion on the screen.
 Resizing may fail on computers due to how GStreamer initializes the video feed
-The sobel filter is VERY slow and unoptimized
+The sobel filter is VERY slow
+There is still a considerable amount of noise(tracked pixels that shouldnt) even after filtering
 
 COOL STUFF LEARNED
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 The advantages and disadvantages of color systems
 How kernel based filtering works
 Matrix approximated derivatives
-How gaussian blur filters, erosion, dilation, and sobel filters work
+How gaussian blur filters, erosion, dilation, and sobel filters work and their runtimes
 
 MID-DEVELOPMENT DESIGN CHANGES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-- realized Camera has a 2D array attribute instead of a 3D array. Pixels aren't divided into two arrays of rows and cols but instead, a 1D array holds all of the pixels.
-- Abstracted video feed to an interface implemented by video file and web cam.
-- Switched to use edge tracking
-- Scratch that^ it failed...Swapped to a binary double threshold filter for HSB color
+- realized Camera has a 1D array attribute instead of a 3D array. Pixels aren't divided into two arrays of rows and cols but instead, a 1D array holds colors(Not a big hiccup, made everything more practical and made some math function for the convenience of 2d coordinates)
+- Abstracted video feed to an interface implemented by video file and web cam(Realized that this was really nice to have to make the driver file cleaner)
+- Switched to use edge tracking(RGB distance provided too much noise, so we hope to use edge detection to contain the object)
+- Scratch that^ it failed...Swapped to a binary double threshold filter for HSB color(edge detection was not performing well enough speed wise nor result wise to be a viable tracking method. HSB provides the pros of RGB but with less downsides after filtering)
 
 LESSONS LEARNED
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -66,6 +66,7 @@ Driver operator is sooooooo useful when you are working on complex problems
 The recursion stack limit is far too small to use for outwards expansion traversal in a large matrix
 Don't hard code too many things, because you may have to restructure and it will be painful to do...
 Don't become too focused on one problem when you have many other things to worry about that have a higher priority.
+You must be concious of efficiency at all times, especially in a program that is very demanding on hardware(For example, we couldn't use a Gaussian blur in our main tracking algorithm because of how expensive it was, though it would have provided better results. You can physically see poor performance through bad framerates)
 
  ______   ______   __   __   __       ______   _______     
 /_____/\ /_____/\ /_/\ /_/\ /_/\     /_____/\ /______/\    
@@ -152,5 +153,6 @@ Dasha: updated usermenu.
 2017-06-06
 --------------------------------------------------------------
 James, Gilvir, Dasha: fixed resizing issue.
+James: Finished up README and updated devlog
 ==============================================================
 ==================================================

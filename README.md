@@ -4,7 +4,7 @@ Cuties Computer Vision (**CCV**) is a basic implementation of [Computer Vision](
 
 # Prerequisites
 1. The Video library by the Processing Foundation must be installed in order to run this program. Information on how to install the library can be found [here](https://github.com/processing/processing/wiki/How-to-Install-a-Contributed-Library) and the actual library repository can be found [here if you wish to manually install it.](https://github.com/processing/processing-video)
-2. In order to use the webcam feature, you must have a webcam, otherwise the program will fail.
+2. In order to use the webcam feature, you must have a webcam, otherwise the program will fail. In order to run a video file, it must be of a video file format supported by GStreamer([valid file types](https://github.com/processing/processing-video/wiki)) otherwise, the program will exit
 3. You must have an understanding of hue, saturation, and brightness in order to calibrate the program. Information can be found further down and also [here](https://en.wikipedia.org/wiki/HSL_and_HSV)
 
 # How to Run
@@ -33,9 +33,11 @@ Here are the keys necessary to use with the program:
 
 Once you have the program running, you will be prompted with two options: "Camera" or "Video File". Click the one you desire to use for the program(see Prerequisite 2 before selecting "Camera"). If you selected "Video File" a file explorer will be opened where you can navigate to the desired **video** file(the file must be a video file supported by the Video library) and open it up.
 
-You should now have a video feed on screen! Now, you may click on object on the screen and it will begin to track it. You can now calibrate the tracking by adjusting the threshold values for hue, saturation, and brightness using the keys above. 
+You should now have a video feed on screen! Now, you may click on object on the screen and it will begin to track it. You can now calibrate the tracking by adjusting the threshold values for hue, saturation, and brightness using the keys above.
 
 You may also change what you see on the screen using the filters. The mirror filter reflects the screen. The sobel edge detection filter displays only the hard edges of the image. The threshold values for this can also be calibrated until you get a nice result. The last filter is the HSB range filter which shows you what the computer "sees" when tracking the object. For more information on these filters, go to the filters section of this file. 
+
+Note: All messages are output through the processing terminal. These include error messages and threshold values.
 
 # Classes
 **CCV**: The main applet which acts as the driver file for the program. This class handles the start up sequence and the main program loop that controls how the TrackedObject and Frame interact with each other and the user. 
